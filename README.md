@@ -7,10 +7,10 @@ It allows to create user account, count how many times target chord/scale has be
 
 ## Prerequisite
 
-|**Program**|**Version**|
-|:---|:---|
-|**IntelliJ**| \>= 2019.x|
-|**MySQL**| \>= 8.0.19|
+| **Program**  | **Version** |
+| :----------- | :---------- |
+| **IntelliJ** | \>= 2019.x  |
+| **MySQL**    | \>= 8.0.19  |
 
 Following technologies were used in the process of creation:
 
@@ -21,9 +21,13 @@ Following technologies were used in the process of creation:
 ## Packages and classes
 
 ### chords
+
 #### Chords
+
 * Declared as entity;
 * Declare int and String fields ;
+
 #### CountingChords
+
 * Declared as entity;
 * Declare int fields;
