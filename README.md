@@ -17,3 +17,5 @@ Following techologies were used in the process of creation:
 * Hibernate
 * MySQL Connector
 
+## Packages and classes
+
