@@ -1,6 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
+import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "counting_chords")
@@ -16,4 +19,12 @@ public class CountingChords {
     @Column(name = "time_practised_successfully")
     private int timePractisedSuccessfully;
 
+    @OneToMany(mappedBy = "countingChords", fetch = FetchType.LAZY)
+    private List<Chords> chords;
+
+    @ManyToOne
+    private Trainee trainee;
+
+    public CountingChords() {
+    }
 }

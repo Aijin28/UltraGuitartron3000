@@ -10,19 +10,28 @@ public class Chords {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "chord_name")
     private String chordName;
 
-    private int first_note;
-    private int second_note;
-    private int third_note;
-    private int fourth_note;
+    @Column(name = "firts_note")
+    private int firsNote;
+    @Column(name = "second_note")
+    private int secondNote;
+    @Column(name = "third_note")
+    private int thirdNote;
+    @Column(name = "fourth_note")
+    private int fourthNote;
 
-    public Chords(String chordName, int first_note, int second_note, int third_note, int fourth_note) {
+    @ManyToOne
+    private CountingChords countingChords;
+
+    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote, CountingChords countingChords) {
         this.chordName = chordName;
-        this.first_note = first_note;
-        this.second_note = second_note;
-        this.third_note = third_note;
-        this.fourth_note = fourth_note;
+        this.firsNote = firsNote;
+        this.secondNote = secondNote;
+        this.thirdNote = thirdNote;
+        this.fourthNote = fourthNote;
+        this.countingChords = countingChords;
     }
 
     public Chords() {
@@ -44,35 +53,43 @@ public class Chords {
         this.chordName = chordName;
     }
 
-    public int getFirst_note() {
-        return first_note;
+    public int getFirsNote() {
+        return firsNote;
     }
 
-    public void setFirst_note(int first_note) {
-        this.first_note = first_note;
+    public void setFirsNote(int firsNote) {
+        this.firsNote = firsNote;
     }
 
-    public int getSecond_note() {
-        return second_note;
+    public int getSecondNote() {
+        return secondNote;
     }
 
-    public void setSecond_note(int second_note) {
-        this.second_note = second_note;
+    public void setSecondNote(int secondNote) {
+        this.secondNote = secondNote;
     }
 
-    public int getThird_note() {
-        return third_note;
+    public int getThirdNote() {
+        return thirdNote;
     }
 
-    public void setThird_note(int third_note) {
-        this.third_note = third_note;
+    public void setThirdNote(int thirdNote) {
+        this.thirdNote = thirdNote;
     }
 
-    public int getFourth_note() {
-        return fourth_note;
+    public int getFourthNote() {
+        return fourthNote;
     }
 
-    public void setFourth_note(int fourth_note) {
-        this.fourth_note = fourth_note;
+    public void setFourthNote(int fourthNote) {
+        this.fourthNote = fourthNote;
+    }
+
+    public CountingChords getCountingChords() {
+        return countingChords;
+    }
+
+    public void setCountingChords(CountingChords countingChords) {
+        this.countingChords = countingChords;
     }
 }
