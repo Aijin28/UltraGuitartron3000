@@ -16,7 +16,6 @@ public class EntityDao<T> {
     public void saveOrUpdate(T entity) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Transaction transaction = null;
-
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
