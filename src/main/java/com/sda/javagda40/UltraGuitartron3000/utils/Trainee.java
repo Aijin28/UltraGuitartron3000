@@ -2,6 +2,8 @@ package com.sda.javagda40.UltraGuitartron3000.utils;
 
 import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
 
+import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,6 +23,8 @@ public class Trainee {
     public Trainee(String name) {
         this.name = name;
     }
+    @Column(name = "chords_practise")
+    private List<CountingChords> countingChords;
 
     public Trainee() {
     }
