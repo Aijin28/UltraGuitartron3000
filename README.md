@@ -39,3 +39,5 @@ Following technologies were used in the process of creation:
 
 **HibernateUtil**
 * Implemented method for using hibernate.cfg.xml to create session
+
+##

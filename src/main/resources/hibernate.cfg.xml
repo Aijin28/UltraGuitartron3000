@@ -27,5 +27,7 @@
         <!--TODO: na potem - dopisanie klas obsługiwanych przez hibernate -->
         <mapping class="com.sda.javagda40.UltraGuitartron3000.scales.Scales"/>
         <mapping class="com.sda.javagda40.UltraGuitartron3000.scales.CountingScales"/>
+        <mapping class="com.sda.javagda40.UltraGuitartron3000.utils.Trainee"/>
+        <mapping class="com.sda.javagda40.UltraGuitartron3000.utils.Notes"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,9 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Trainee {
@@ -13,6 +13,10 @@ public class Trainee {
     private int id;
 
     private String name;
+
+    @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
+    @Column(name = "scales_practise")
+    private List<CountingScales> countingScalesList;
 
     public Trainee(String name) {
         this.name = name;
@@ -35,5 +39,13 @@ public class Trainee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<CountingScales> getCountingScalesList() {
+        return countingScalesList;
+    }
+
+    public void setCountingScalesList(List<CountingScales> countingScalesList) {
+        this.countingScalesList = countingScalesList;
     }
 }
