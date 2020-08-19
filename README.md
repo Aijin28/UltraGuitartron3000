@@ -1,19 +1,35 @@
-# Ultra Guitartron 3000
+# Introduction
 
-## Introduction
+The goal of this application is to make learning process of scales and building chords easier. 
+It allows to create user account, count how many times target chord/scale has been practised and how many were practised successfully.
 
-The goal of this application is to make learning process of scales and buiding chords easier. 
+# Requirements
 
-## Prerequisite
+## System
 
-|**Program**|**Version**|
-|:---|:---|
-|**IntelliJ**| \>= 2019.x|
-|**MySQL**| \>= 8.0.19|
+| **Program**  | **Version** |
+| :----------- | :---------- |
+| **IntelliJ** | \>= 2019.x  |
+| **MySQL**    | \>= 8.0.19  |
 
-Following techologies were used in the process of creation:
+## Programming
 
-* JDK 11
-* Hibernate
-* MySQL Connector
+| **Technology**      | **Version** |
+| :------------------ | :---------- |
+| **JDK**             | \>= 11      |
+| **Hibernate**       | \>= 5.4.xx. |
+| **MySQL Connector** | \>= 8.0.xx. |
 
+# Packages and classes
+
+## chords
+
+### Chords
+
+* Declared as entity;
+* Declare int and String fields ;
+
+### CountingChords
+
+* Declared as entity;
+* Declare int fields;

@@ -1,9 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Trainee {
@@ -14,26 +14,11 @@ public class Trainee {
 
     private String name;
 
-    public Trainee(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
+    @Column(name = "chords_practise")
+    private List<CountingChords> countingChords;
 
     public Trainee() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

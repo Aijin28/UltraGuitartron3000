@@ -1,9 +1,8 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
+
+import javax.persistence.*;
 
 @Entity
 public class Notes {
@@ -11,14 +10,21 @@ public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String note;
 
-    public Notes(String note) {
-        this.note = note;
-    }
+    @ManyToOne
+    private Chords chords;
+
 
     public Notes() {
+    }
+
+    public Chords getChords() {
+        return chords;
+    }
+
+    public void setChords(Chords chords) {
+        this.chords = chords;
     }
 
     public int getId() {
