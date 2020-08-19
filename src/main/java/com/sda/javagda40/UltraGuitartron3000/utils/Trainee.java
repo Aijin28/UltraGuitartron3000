@@ -18,6 +18,7 @@ public class Trainee {
     @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
     @Column(name = "scales_practise")
     private List<CountingScales> countingScalesList;
+
     @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
     @Column(name = "chords_practise")
     private List<CountingChords> countingChords;

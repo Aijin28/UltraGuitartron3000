@@ -11,13 +11,12 @@ import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
 public class AppUGT {
 
     public static void main(String[] args) {
-        Notes c = new Notes("C");
+        Notes notes = new Notes();
         Trainee trainee = new Trainee();
         ChordsController chordsController = new ChordsController();
         CountingScales countingScales = new CountingScales();
         Scales scales = new Scales();
         CountingChords countingChords = new CountingChords();
-        EntityDao<Notes> appUserEntityDao = new EntityDao<>();
-        appUserEntityDao.saveOrUpdate(c);
+        EntityDao appUserEntityDao = new EntityDao<>();
     }
 }

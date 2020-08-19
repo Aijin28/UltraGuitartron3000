@@ -10,7 +10,7 @@ It allows to create user account, count how many times target chord/scale has be
 | **Program**  | **Version** |
 | :----------- | :---------- |
 | **IntelliJ** | \>= 2019.x  |
-| **MySQL**    | \>= 8.0.19  |
+| **MySQL**    | \>= 8.0.xx  |
 
 
 ## Programming
@@ -19,8 +19,11 @@ It allows to create user account, count how many times target chord/scale has be
 | **Technology**      | **Version** |
 | :------------------ | :---------- |
 | **JDK**             | \>= 11      |
-| **Hibernate**       | \>= 5.4.xx. |
-| **MySQL Connector** | \>= 8.0.xx. |
+| **Hibernate**       | \>= 5.4.xx  |
+| **MySQL Connector** | \>= 8.0.xx  |
+| **HSQLDB**          | \>= 2.3.x   |
+| **Junit**           | \>= 4.11    |
+| **Javax**           | \>= 2.2.x   |
 
 ##
 
@@ -43,23 +46,20 @@ It allows to create user account, count how many times target chord/scale has be
 ### Chords
 
 * Declared as entity;
-* Declare int and String fields ;
+* Declare int and String fields;
 
 ### CountingChords
 
 * Declared as entity;
 * Declare int fields;
 
-## resources 
-
-* `hibernate.cfg.xml` - configuration for hibernate session factory
 
 ## database
 
 ### EntityDao
 
-* Implemented standard Dao methods
+* Implemented standard Dao methods;
 
-### HibernateUtil
+### HibernateFactory
 
-* Implemented method for using hibernate.cfg.xml to create session
+* Configures hibernate and creates session and connection to data base;
