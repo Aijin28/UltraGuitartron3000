@@ -1,5 +1,7 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
+import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
+
 import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
 
 import javax.persistence.*;
@@ -15,10 +17,39 @@ public class Trainee {
     private String name;
 
     @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
+    @Column(name = "scales_practise")
+    private List<CountingScales> countingScalesList;
+
+    public Trainee(String name) {
+        this.name = name;
+    }
     @Column(name = "chords_practise")
     private List<CountingChords> countingChords;
 
     public Trainee() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<CountingScales> getCountingScalesList() {
+        return countingScalesList;
+    }
+
+    public void setCountingScalesList(List<CountingScales> countingScalesList) {
+        this.countingScalesList = countingScalesList;
+    }
 }
