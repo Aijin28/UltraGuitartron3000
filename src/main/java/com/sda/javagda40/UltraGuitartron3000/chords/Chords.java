@@ -1,6 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "chords")
@@ -22,19 +25,31 @@ public class Chords {
     @Column(name = "fourth_note")
     private int fourthNote;
 
+    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
+    private List<Notes> notes;
+
     @ManyToOne
     private CountingChords countingChords;
 
-    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote, CountingChords countingChords) {
+    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote, List<Notes> notes, CountingChords countingChords) {
         this.chordName = chordName;
         this.firsNote = firsNote;
         this.secondNote = secondNote;
         this.thirdNote = thirdNote;
         this.fourthNote = fourthNote;
+        this.notes = notes;
         this.countingChords = countingChords;
     }
 
     public Chords() {
+    }
+
+    public List<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Notes> notes) {
+        this.notes = notes;
     }
 
     public int getId() {
@@ -91,5 +106,15 @@ public class Chords {
 
     public void setCountingChords(CountingChords countingChords) {
         this.countingChords = countingChords;
+    }
+
+    @Override
+    public String toString() {
+        return "chord_name='" + chordName + " - " +
+                "firs_note= " + firsNote +
+                ", second_note= " + secondNote +
+                ", third_note= " + thirdNote +
+                ", fourth_note= " + fourthNote +
+                "\n";
     }
 }
