@@ -9,8 +9,9 @@ import org.hibernate.query.Query;
 public class ChordsController {
     private static SessionFactory factory;
 
+//    na pewno jest na to ładniejszy sposób, powinno dać się jednym query pobrać parę note'ów
     public static void gettingChord(Chords chord) {
-        Transaction transaction;
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
             transaction = session.beginTransaction();
             String first = "SELECT N.note FROM Notes N WHERE N.id = :first_note";
@@ -27,24 +28,26 @@ public class ChordsController {
             fourthQuery.setParameter("first_note", chord.getFourthNote());
             transaction.commit();
         } catch (HibernateError e) {
+            if(transaction!=null) transaction.rollback();
             e.printStackTrace();
         }
     }
 
     public static void addingChord(String name, int first_note, int secont_note, int third_note, int fourth_note) {
-        Transaction transaction;
+        Transaction transaction = null;
+        Integer chordID;
         try (Session session = factory.openSession()) {
             transaction = session.beginTransaction();
-             String addedChord = "INSERT INTO Chords (name, firstNote, secondNote, thirdNote, fourthNote)" +
-                    "VALUES (?, ?, ?, ?, ?)";
-             Query addingQuery = session.createQuery(addedChord);
-             addingQuery.setParameter(1, name);
-             addingQuery.setParameter(2, first_note);
-             addingQuery.setParameter(3, secont_note);
-             addingQuery.setParameter(4, third_note);
-             addingQuery.setParameter(5, fourth_note);
+            Chords newChord = new Chords();
+            newChord.setChordName(name);
+            newChord.setFirsNote(first_note);
+            newChord.setSecondNote(secont_note);
+            newChord.setThirdNote(third_note);
+            newChord.setFourthNote(fourth_note);
+            chordID = (Integer) session.save(newChord);
              transaction.commit();
         } catch (HibernateError e) {
+            if(transaction!=null) transaction.rollback();
             e.printStackTrace();
         }
     }
