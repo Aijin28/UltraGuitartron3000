@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class EntityDao<T> {
+    private HibernateFactory hibernateFactory = new HibernateFactory();
     public void saveOrUpdate(T entity) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Transaction transaction = null;
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+                Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
@@ -28,7 +29,7 @@ public class EntityDao<T> {
     }
 
     public Optional<T> findById(Class<T> classType, int id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(classType, id));
         } catch (HibernateException he) {
@@ -38,7 +39,7 @@ public class EntityDao<T> {
     }
 
     public void delete(T entity) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
 
         try (Session session = sessionFactory.openSession()) {
@@ -55,7 +56,7 @@ public class EntityDao<T> {
     public List<T> findAll(Class<T> classType) {
         List<T> list = new ArrayList<>();
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
 
             // narzędzie do tworzenia zapytań i kreowania klauzuli 'where'

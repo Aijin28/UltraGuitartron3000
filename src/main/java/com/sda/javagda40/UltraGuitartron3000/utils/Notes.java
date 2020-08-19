@@ -1,6 +1,7 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
+import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 
 import javax.persistence.*;
 
@@ -14,6 +15,8 @@ public class Notes {
 
     @ManyToOne
     private Chords chords;
+    @ManyToOne
+    private Scales scales;
 
     public Notes(String note) {
         this.note = note;
@@ -44,5 +47,13 @@ public class Notes {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Scales getScales() {
+        return scales;
+    }
+
+    public void setScales(Scales scales) {
+        this.scales = scales;
     }
 }

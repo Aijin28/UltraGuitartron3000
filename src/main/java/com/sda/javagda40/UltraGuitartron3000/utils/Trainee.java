@@ -1,8 +1,7 @@
 package com.sda.javagda40.UltraGuitartron3000.utils;
 
-import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
-
 import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
+import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,12 +18,13 @@ public class Trainee {
     @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
     @Column(name = "scales_practise")
     private List<CountingScales> countingScalesList;
+    @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
+    @Column(name = "chords_practise")
+    private List<CountingChords> countingChords;
 
     public Trainee(String name) {
         this.name = name;
     }
-    @Column(name = "chords_practise")
-    private List<CountingChords> countingChords;
 
     public Trainee() {
     }

@@ -1,6 +1,7 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
-import com.sda.javagda40.UltraGuitartron3000.database.HibernateUtil;
+
+import com.sda.javagda40.UltraGuitartron3000.database.HibernateFactory;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class ChordsController {
-    private static SessionFactory factory = HibernateUtil.getSessionFactory();
+    private static SessionFactory factory = new HibernateFactory().getSessionFactory();
 
 //    na pewno jest na to ładniejszy sposób, powinno dać się jednym query pobrać parę note'ów
     public static void gettingChord(Chords chord) {
