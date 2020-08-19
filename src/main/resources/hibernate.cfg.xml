@@ -30,7 +30,7 @@
         <mapping class="com.sda.javagda40.UltraGuitartron3000.utils.Trainee"/>
         <mapping class="com.sda.javagda40.UltraGuitartron3000.utils.Notes"/>
         <mapping class="com.sda.javagda40.UltraGuitartron3000.chords.Chords"/>
-        <mapping class="com.sda.javagda40.UltraGuitartron3000.chords.CountingChords"/>
         <mapping class="com.sda.javagda40.UltraGuitartron3000.chords.ChordsController"/>
+        <mapping class="com.sda.javagda40.UltraGuitartron3000.chords.CountingChords"/>
     </session-factory>
 </hibernate-configuration>

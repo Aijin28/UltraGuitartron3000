@@ -15,6 +15,9 @@ public class Notes {
     @ManyToOne
     private Chords chords;
 
+    public Notes(String note) {
+        this.note = note;
+    }
 
     public Notes() {
     }

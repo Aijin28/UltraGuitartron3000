@@ -31,14 +31,12 @@ public class Chords {
     @ManyToOne
     private CountingChords countingChords;
 
-    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote, List<Notes> notes, CountingChords countingChords) {
+    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote) {
         this.chordName = chordName;
         this.firsNote = firsNote;
         this.secondNote = secondNote;
         this.thirdNote = thirdNote;
         this.fourthNote = fourthNote;
-        this.notes = notes;
-        this.countingChords = countingChords;
     }
 
     public Chords() {
