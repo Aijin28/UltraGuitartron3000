@@ -1,9 +1,8 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
-import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "chords")
@@ -16,41 +15,39 @@ public class Chords {
     @Column(name = "chord_name")
     private String chordName;
 
-    @Column(name = "firts_note")
-    private int firsNote;
+    @Column(name = "first_note")
+    private int firstNote;
     @Column(name = "second_note")
     private int secondNote;
     @Column(name = "third_note")
     private int thirdNote;
     @Column(name = "fourth_note")
     private int fourthNote;
-
-    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
-    private List<Notes> notes;
+//
+//    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
+//    private List<Notes> notes;
 
     @ManyToOne
     private CountingChords countingChords;
 
-    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote, List<Notes> notes, CountingChords countingChords) {
+    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote) {
         this.chordName = chordName;
-        this.firsNote = firsNote;
+        this.firstNote = firsNote;
         this.secondNote = secondNote;
         this.thirdNote = thirdNote;
         this.fourthNote = fourthNote;
-        this.notes = notes;
-        this.countingChords = countingChords;
     }
 
     public Chords() {
     }
 
-    public List<Notes> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Notes> notes) {
-        this.notes = notes;
-    }
+//    public List<Notes> getNotes() {
+//        return notes;
+//    }
+//
+//    public void setNotes(List<Notes> notes) {
+//        this.notes = notes;
+//    }
 
     public int getId() {
         return id;
@@ -68,12 +65,12 @@ public class Chords {
         this.chordName = chordName;
     }
 
-    public int getFirsNote() {
-        return firsNote;
+    public int getFirstNote() {
+        return firstNote;
     }
 
-    public void setFirsNote(int firsNote) {
-        this.firsNote = firsNote;
+    public void setFirstNote(int firstNote) {
+        this.firstNote = firstNote;
     }
 
     public int getSecondNote() {
@@ -110,11 +107,12 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "chord_name='" + chordName + " - " +
-                "firs_note= " + firsNote +
-                ", second_note= " + secondNote +
-                ", third_note= " + thirdNote +
-                ", fourth_note= " + fourthNote +
-                "\n";
+        return "Chords{" +
+                "chordName='" + chordName + '\'' +
+                ", firsNote=" + firstNote +
+                ", secondNote=" + secondNote +
+                ", thirdNote=" + thirdNote +
+                ", fourthNote=" + fourthNote +
+                '}';
     }
 }
