@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class EntityDao<T> {
-    private HibernateFactory hibernateFactory = new HibernateFactory();
+    private final HibernateFactory hibernateFactory = new HibernateFactory();
+
     public void saveOrUpdate(T entity) throws InterruptedException {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-                Transaction transaction = null;
+        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
@@ -29,17 +30,18 @@ public class EntityDao<T> {
         Thread.sleep(1000L);
     }
 
-    public Optional<T> findById(Class<T> classType, int id) {
+    public Optional<T> findById(Class<T> classType, int id) throws InterruptedException {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(classType, id));
         } catch (HibernateException he) {
             he.printStackTrace();
         }
+        Thread.sleep(1000L);
         return Optional.empty();
     }
 
-    public void delete(T entity) {
+    public void delete(T entity) throws InterruptedException {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
 
@@ -52,9 +54,10 @@ public class EntityDao<T> {
                 transaction.rollback();
             }
         }
+        Thread.sleep(1000L);
     }
 
-    public List<T> findAll(Class<T> classType) {
+    public List<T> findAll(Class<T> classType) throws InterruptedException {
         List<T> list = new ArrayList<>();
 
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
@@ -82,6 +85,7 @@ public class EntityDao<T> {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
+        Thread.sleep(1000L);
         return list;
     }
 }

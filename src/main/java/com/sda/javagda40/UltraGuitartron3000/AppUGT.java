@@ -2,30 +2,26 @@ package com.sda.javagda40.UltraGuitartron3000;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
-import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
-import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.filling.FillingDB;
-import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+
+import java.util.Optional;
 
 public class AppUGT {
 
     public static void main(String[] args) {
-//        Notes notes = new Notes();
-//        Trainee trainee = new Trainee();
-//        CountingScales countingScales = new CountingScales();
-//        Scales scales = new Scales();
-//        CountingChords countingChords = new CountingChords();
-//        ChordsController chordsController = new ChordsController();
-//        Chords chords = new Chords();
-//        EntityDao dao = new EntityDao<>();
         try {
-            FillingDB.fillingNotes();
-            FillingDB.fillingChords();
+//            FillingDB.fillingNotes();
+//            FillingDB.fillingChords();
+            EntityDao<Chords> chordsDAO = new EntityDao<>();
+            Optional<Chords> chordById = chordsDAO.findById(Chords.class, 4);
+            System.out.println(chordById);
+            String choice = "B";
+            System.out.println(ChordsController.gettingChordFromArray(chordById, choice));
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Wake up");
         }
     }
 }

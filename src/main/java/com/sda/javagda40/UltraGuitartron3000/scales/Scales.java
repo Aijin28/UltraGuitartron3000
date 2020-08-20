@@ -1,6 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.scales;
 
-import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
 import java.util.List;
@@ -37,8 +37,8 @@ public class Scales {
     @Column(name = "seventh_note")
     private int seventhNote;
 
-    @OneToMany(mappedBy = "scales", fetch = FetchType.LAZY)
-    private List<Notes> notes;
+//    @OneToMany(mappedBy = "scales", fetch = FetchType.LAZY)
+//    private List<Notes> notes;
 
     @ManyToOne
     private CountingScales countingScales;

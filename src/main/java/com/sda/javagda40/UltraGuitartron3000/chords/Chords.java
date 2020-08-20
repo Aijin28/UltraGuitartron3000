@@ -1,6 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
-import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,9 +24,9 @@ public class Chords {
     private int thirdNote;
     @Column(name = "fourth_note")
     private int fourthNote;
-
-    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
-    private List<Notes> notes;
+//
+//    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
+//    private List<Notes> notes;
 
     @ManyToOne
     private CountingChords countingChords;
@@ -42,13 +42,13 @@ public class Chords {
     public Chords() {
     }
 
-    public List<Notes> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Notes> notes) {
-        this.notes = notes;
-    }
+//    public List<Notes> getNotes() {
+//        return notes;
+//    }
+//
+//    public void setNotes(List<Notes> notes) {
+//        this.notes = notes;
+//    }
 
     public int getId() {
         return id;
@@ -112,7 +112,6 @@ public class Chords {
                 "firs_note= " + firsNote +
                 ", second_note= " + secondNote +
                 ", third_note= " + thirdNote +
-                ", fourth_note= " + fourthNote +
-                "\n";
+                ", fourth_note= " + fourthNote;
     }
 }
