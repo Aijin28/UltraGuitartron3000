@@ -34,7 +34,7 @@ public class FillingDB {
 //        notesDAO.saveOrUpdate(b);
 //    }
 
-    public static void fillingChords() throws InterruptedException {
+    public static void fillingChords(){
         EntityDao<Chords> chordsDAO = new EntityDao<>();
         Chords xmaj7 = new Chords("Xmaj7", 1, 5, 8, 12);
         chordsDAO.saveOrUpdate(xmaj7);

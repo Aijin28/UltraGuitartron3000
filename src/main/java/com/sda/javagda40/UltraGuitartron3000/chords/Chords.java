@@ -108,7 +108,7 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "Chords{" +
+        return "\nChords{" +
                 "chordName='" + chordName + '\'' +
                 ", firsNote=" + firsNote +
                 ", secondNote=" + secondNote +
