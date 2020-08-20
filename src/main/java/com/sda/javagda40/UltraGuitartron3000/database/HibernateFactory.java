@@ -21,13 +21,13 @@ public class HibernateFactory {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbc.JDBCDriver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
-        configuration.addAnnotatedClass(Chords.class);
-        configuration.addAnnotatedClass(CountingChords.class);
-        configuration.addAnnotatedClass(ChordsController.class);
-        configuration.addAnnotatedClass(Scales.class);
-        configuration.addAnnotatedClass(CountingScales.class);
-        configuration.addAnnotatedClass(Trainee.class);
         configuration.addAnnotatedClass(Notes.class);
+        configuration.addAnnotatedClass(Chords.class);
+        configuration.addAnnotatedClass(Scales.class);
+        configuration.addAnnotatedClass(CountingChords.class);
+        configuration.addAnnotatedClass(CountingScales.class);
+        configuration.addAnnotatedClass(ChordsController.class);
+        configuration.addAnnotatedClass(Trainee.class);
 
         return configuration;
     }

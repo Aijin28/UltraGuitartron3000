@@ -16,7 +16,7 @@ public class Chords {
     @Column(name = "chord_name")
     private String chordName;
 
-    @Column(name = "firts_note")
+    @Column(name = "first_note")
     private int firsNote;
     @Column(name = "second_note")
     private int secondNote;

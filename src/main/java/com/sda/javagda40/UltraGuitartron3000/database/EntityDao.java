@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class EntityDao<T> {
     private HibernateFactory hibernateFactory = new HibernateFactory();
-    public void saveOrUpdate(T entity) {
+    public void saveOrUpdate(T entity) throws InterruptedException {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
                 Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
@@ -26,6 +26,7 @@ public class EntityDao<T> {
                 transaction.rollback();
             }
         }
+        Thread.sleep(1000L);
     }
 
     public Optional<T> findById(Class<T> classType, int id) {

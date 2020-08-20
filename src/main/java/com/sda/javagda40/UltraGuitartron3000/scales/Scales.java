@@ -44,7 +44,7 @@ public class Scales {
     private CountingScales countingScales;
 
 
-    public Scales(String scaleName, int firstNote, int secondNote, int thirdNote, int fourthNote, int fifthNote, int sixthNote, int seventhNote, CountingScales countingScales) {
+    public Scales(String scaleName, int firstNote, int secondNote, int thirdNote, int fourthNote, int fifthNote, int sixthNote, int seventhNote) {
         this.scaleName = scaleName;
         this.firstNote = firstNote;
         this.secondNote = secondNote;
@@ -53,7 +53,6 @@ public class Scales {
         this.fifthNote = fifthNote;
         this.sixthNote = sixthNote;
         this.seventhNote = seventhNote;
-        this.countingScales = countingScales;
     }
 
     public Scales() {

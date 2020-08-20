@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class ChordsController {
-    private static SessionFactory factory = new HibernateFactory().getSessionFactory();
+    private static final SessionFactory factory = new HibernateFactory().getSessionFactory();
 
 //    na pewno jest na to ładniejszy sposób, powinno dać się jednym query pobrać parę note'ów
     public static void gettingChord(Chords chord) {
