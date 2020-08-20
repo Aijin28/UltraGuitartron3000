@@ -108,10 +108,12 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "chord_name='" + chordName + " - " +
-                "firs_note= " + firsNote +
-                ", second_note= " + secondNote +
-                ", third_note= " + thirdNote +
-                ", fourth_note= " + fourthNote;
+        return "Chords{" +
+                "chordName='" + chordName + '\'' +
+                ", firsNote=" + firsNote +
+                ", secondNote=" + secondNote +
+                ", thirdNote=" + thirdNote +
+                ", fourthNote=" + fourthNote +
+                '}';
     }
 }

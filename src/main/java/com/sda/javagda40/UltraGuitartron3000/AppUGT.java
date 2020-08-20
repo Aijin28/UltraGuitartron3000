@@ -18,6 +18,9 @@ public class AppUGT {
             System.out.println(chordById);
             String choice = "B";
             System.out.println(ChordsController.gettingChordFromArray(chordById, choice));
+            Chords papiezowa = new Chords("papieżowa", 2, 1, 3, 7);
+            chordsDAO.saveOrUpdate(papiezowa);
+            System.out.println(chordsDAO.findAll(Chords.class));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

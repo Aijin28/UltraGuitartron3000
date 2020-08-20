@@ -63,3 +63,14 @@ It allows to create user account, count how many times target chord/scale has be
 ### HibernateFactory
 
 * Configures hibernate and creates session and connection to data base;
+
+## utils
+
+### Trainee
+
+* Declared as entity;
+* Represents user of application;
+
+### NotesList
+
+* Contains list of notes used in chords and scales
