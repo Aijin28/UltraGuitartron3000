@@ -2,12 +2,11 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 
 
 import com.sda.javagda40.UltraGuitartron3000.database.HibernateFactory;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesArray;
+import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class ChordsController {
         List<String> chosenChord = new ArrayList<>();
         if (optionalChord.isPresent()) {
             Chords chord = optionalChord.get();
-            List<String> notesArray = NotesArray.getNotesArray();
+            List<String> notesArray = NotesList.getNotesList();
             int zmienna = notesArray.indexOf(choice);
 //            -1 wykorzystane, ponieważ listy indexuje się od 0, a chciałem zachować prawidłową numerację stopni w akordach
             chosenChord.add(notesArray.get(chord.getFirsNote() -1 + zmienna));

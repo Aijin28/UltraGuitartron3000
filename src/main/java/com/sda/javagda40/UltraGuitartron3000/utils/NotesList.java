@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class NotesArray {
-    public static final List<String> notesArray = new ArrayList<>
+public class NotesList {
+    public static final List<String> notesList = new ArrayList<>
             (Arrays.asList(
 //                    wartości powtórzone, żeby  przy wybraniu prymy pod koniec oktawy nie trzeba było przekształcać ani przepisywać.
                     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
                     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
 
-    public static List<String> getNotesArray() {
-        return notesArray;
+    public static List<String> getNotesList() {
+        return notesList;
     }
 }
