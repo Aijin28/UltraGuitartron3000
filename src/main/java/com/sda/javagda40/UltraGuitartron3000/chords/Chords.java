@@ -5,7 +5,7 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "chords")
+@Table(name = "chords", uniqueConstraints = @UniqueConstraint(columnNames = "chord_name"))
 public class Chords {
 
     @Id
@@ -107,12 +107,11 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "Chords{" +
-                "chordName='" + chordName + '\'' +
-                ", firsNote=" + firstNote +
-                ", secondNote=" + secondNote +
-                ", thirdNote=" + thirdNote +
-                ", fourthNote=" + fourthNote +
-                '}';
+        return "\nid: " + id +
+                ", chordName: " + chordName +
+                ", firstNote: " + firstNote +
+                ", secondNote: " + secondNote +
+                ", thirdNote: " + thirdNote +
+                ", fourthNote: " + fourthNote;
     }
 }

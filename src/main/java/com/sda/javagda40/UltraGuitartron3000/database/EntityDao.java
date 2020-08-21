@@ -22,15 +22,16 @@ public class EntityDao<T> {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
-                transaction.rollback();
+                try { transaction.rollback();
+                }catch (IllegalStateException ex){
+                    System.out.println(entity + " CHECKED");
+                }
             }
-        }
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ie){
+            ie.printStackTrace();
         }
     }
 
@@ -42,7 +43,7 @@ public class EntityDao<T> {
             he.printStackTrace();
         }
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(500L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -57,13 +58,11 @@ public class EntityDao<T> {
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }
-        try {
-            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -98,7 +97,7 @@ public class EntityDao<T> {
             he.printStackTrace();
         }
         try {
-            Thread.sleep(1000L);
+            Thread.sleep(500L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

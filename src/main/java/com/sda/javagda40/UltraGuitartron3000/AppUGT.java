@@ -12,7 +12,7 @@ public class AppUGT {
     public static void main(String[] args) {
 //            FillingDB.fillingNotes();
 //            FillingDB.fillingChords();
-//            FillingDb.fillingScales();
+//            FillingDB.fillingScales();
         EntityDao<Chords> chordsDAO = new EntityDao<>();
         Optional<Chords> chordById = chordsDAO.findById(Chords.class, 4);
         System.out.println(chordById);
