@@ -36,13 +36,13 @@ public class FillingDB {
 
     public static void fillingChords(){
         EntityDao<Chords> chordsDAO = new EntityDao<>();
-        Chords xmaj7 = new Chords("Xmaj7", 1, 5, 8, 12);
+        Chords xmaj7 = new Chords("maj7", 1, 5, 8, 12);
         chordsDAO.saveOrUpdate(xmaj7);
-        Chords x7 = new Chords("X7", 1, 5, 8, 11);
+        Chords x7 = new Chords("7", 1, 5, 8, 11);
         chordsDAO.saveOrUpdate(x7);
-        Chords xmin7 = new Chords("Xmin7", 1, 4, 8, 11);
+        Chords xmin7 = new Chords("min7", 1, 4, 8, 11);
         chordsDAO.saveOrUpdate(xmin7);
-        Chords xmin75b = new Chords("Xmin7/5b", 1, 4, 7, 11);
+        Chords xmin75b = new Chords("min7/5b", 1, 4, 7, 11);
         chordsDAO.saveOrUpdate(xmin75b);
     }
 }

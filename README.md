@@ -21,9 +21,10 @@ It allows to create user account, count how many times target chord/scale has be
 | **JDK**             | \>= 11      |
 | **Hibernate**       | \>= 5.4.xx  |
 | **MySQL Connector** | \>= 8.0.xx  |
-| **HSQLDB**          | \>= 2.3.x   |
+| **HSQLDB**          | \>= 2.4.x   |
 | **Junit**           | \>= 4.11    |
 | **Javax**           | \>= 2.2.x   |
+| **Log4j2**          | \>= 2.13.x  |
 
 ##
 

@@ -3,10 +3,9 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 //import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "chords")
+@Table(name = "chords", uniqueConstraints = @UniqueConstraint(columnNames = "chord_name"))
 public class Chords {
 
     @Id
@@ -17,7 +16,7 @@ public class Chords {
     private String chordName;
 
     @Column(name = "first_note")
-    private int firsNote;
+    private int firstNote;
     @Column(name = "second_note")
     private int secondNote;
     @Column(name = "third_note")
@@ -31,9 +30,9 @@ public class Chords {
     @ManyToOne
     private CountingChords countingChords;
 
-    public Chords(String chordName, int firsNote, int secondNote, int thirdNote, int fourthNote) {
+    public Chords(String chordName, int firstNote, int secondNote, int thirdNote, int fourthNote) {
         this.chordName = chordName;
-        this.firsNote = firsNote;
+        this.firstNote = firstNote;
         this.secondNote = secondNote;
         this.thirdNote = thirdNote;
         this.fourthNote = fourthNote;
@@ -66,12 +65,12 @@ public class Chords {
         this.chordName = chordName;
     }
 
-    public int getFirsNote() {
-        return firsNote;
+    public int getFirstNote() {
+        return firstNote;
     }
 
-    public void setFirsNote(int firsNote) {
-        this.firsNote = firsNote;
+    public void setFirstNote(int firstNote) {
+        this.firstNote = firstNote;
     }
 
     public int getSecondNote() {
@@ -108,12 +107,10 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "\nChords{" +
-                "chordName='" + chordName + '\'' +
-                ", firsNote=" + firsNote +
-                ", secondNote=" + secondNote +
-                ", thirdNote=" + thirdNote +
-                ", fourthNote=" + fourthNote +
-                '}';
+        return "Chord name = '" + chordName + '\'' +
+                ": \nfirst note = " + firstNote +
+                ", second note = " + secondNote +
+                ", third note = " + thirdNote +
+                ", fourth note = " + fourthNote;
     }
 }

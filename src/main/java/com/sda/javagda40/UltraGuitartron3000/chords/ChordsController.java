@@ -3,14 +3,10 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 
 import com.sda.javagda40.UltraGuitartron3000.database.HibernateFactory;
 import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
-import org.hibernate.HibernateError;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ChordsController {
     private static final SessionFactory factory = new HibernateFactory().getSessionFactory();
@@ -44,20 +40,20 @@ public class ChordsController {
 //        }
 //    }
 
-    public static List<String> gettingChordFromList(Optional<Chords> optionalChord, String choice) {
+    public static List<String> gettingChordFromList(Chords chord, String choice) {
         List<String> chosenChord = new ArrayList<>();
-        if (optionalChord.isPresent()) {
-            Chords chord = optionalChord.get();
+//        if (optionalChord.isPresent()) {
+//            Chords chord = optionalChord.get();
             List<String> notesArray = NotesList.getNotesList();
-            int firstNoteIndex = notesArray.indexOf(choice);
+            int firstNoteIndex = notesArray.indexOf(choice.toUpperCase());
 //            -1 wykorzystane, ponieważ listy indexuje się od 0, a chciałem zachować prawidłową numerację stopni w akordach
-            chosenChord.add(notesArray.get(chord.getFirsNote() -1 + firstNoteIndex));
+            chosenChord.add(notesArray.get(chord.getFirstNote() -1 + firstNoteIndex));
             chosenChord.add(notesArray.get(chord.getSecondNote() -1 + firstNoteIndex));
             chosenChord.add(notesArray.get(chord.getThirdNote() -1 + firstNoteIndex));
             chosenChord.add(notesArray.get(chord.getFourthNote() -1 + firstNoteIndex));
         return chosenChord;
-        } else System.out.println("Nie ma takiego akordu.");
-        return null;
+//        } else System.out.println("Został wybrany akord spoza listy.");
+//        return null;
     }
 
 //    public static void addingChord(String name, int first_note, int secont_note, int third_note, int fourth_note) throws InterruptedException {

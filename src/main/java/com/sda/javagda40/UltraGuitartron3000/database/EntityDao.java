@@ -23,13 +23,14 @@ public class EntityDao<T> {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
-                transaction.rollback();
+               try{ transaction.rollback();}
+               catch(IllegalStateException ex){
+                   System.out.println("On już tu jest.");
+               }
             }
-        }
-        try {
-            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -39,14 +40,10 @@ public class EntityDao<T> {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
 
         try (Session session = sessionFactory.openSession()) {
+            Thread.sleep(500L);
             return Optional.ofNullable(session.get(classType, id));
-        } catch (HibernateException he) {
+        } catch (HibernateException | InterruptedException he) {
             he.printStackTrace();
-        }
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return Optional.empty();
     }
@@ -59,13 +56,11 @@ public class EntityDao<T> {
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                 transaction.rollback();
             }
-        }
-        try {
-            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -96,13 +91,9 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-        } catch (HibernateException he) {
+            Thread.sleep(500L);
+        } catch (HibernateException | InterruptedException he) {
             he.printStackTrace();
-        }
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return list;
     }
