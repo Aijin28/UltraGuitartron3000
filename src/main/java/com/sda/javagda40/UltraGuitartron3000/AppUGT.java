@@ -1,6 +1,7 @@
 package com.sda.javagda40.UltraGuitartron3000;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
+import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.database.ScalesDao;
 import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
@@ -19,21 +20,18 @@ public class AppUGT {
 
     public static void main(String[] args) {
         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        ScalesDao scalesDao = new ScalesDao();
-        scalesDao.fillingScales();
+        ChordsDao dao = new ChordsDao();
+        dao.fillingChords(); //
+
         System.out.println("Lista prym do wyboru: " + NotesList.getNotesList().subList(0, NotesList.getNotesList().size() / 2));
         EntityDao<Chords> chordsDAO = new EntityDao<>();
-        List<String> chordNameList = new ArrayList<>();
-        for (Chords chord : chordsDAO.findAll(Chords.class)) {
-            chordNameList.add(chord.getChordName());
-        }
-        System.out.println("Akordy do wyboru: " + chordNameList);
+        System.out.println(dao.findChordNames());
 
 //        addingChords(chordsDAO);
         System.out.println("Podaj " + EXIT + " aby zakończyć aplikację.");
         String firstStep = choosingFirstStep(EXIT);
-        String chordTypeChoice = choosingChordType(EXIT, chordNameList);
-        findingChord(chordsDAO, firstStep, chordTypeChoice);
+//        String chordTypeChoice = choosingChordType(EXIT, chordNameList);
+//        findingChord(chordsDAO, firstStep, chordTypeChoice);
     }
 
     private static String choosingFirstStep(String EXIT) {
@@ -104,12 +102,12 @@ public class AppUGT {
 
     //           logika do szukania akordu po nazwie
     private static void findingChord(EntityDao<Chords> chordsDAO, String primeNoteChoice, String chordTypeChoice) {
-        for (Chords chord : chordsDAO.findAll(Chords.class)) {
-            if (chord.getChordName().equalsIgnoreCase(chordTypeChoice)) {
-                Optional<Chords> optionalChords = chordsDAO.findById(Chords.class, chord.getId());
-//                optionalChords.ifPresent(chords -> System.out.println(ChordsController.gettingChordFromList(chords, primeNoteChoice)));
-                Chords foundChord = optionalChords.get();
-            }
+        ChordsDao chordDao = new ChordsDao();
+
+        Optional<Chords> optionalChords = chordDao.findByChordName(chordTypeChoice);
+        if (optionalChords.isPresent()) {
+            Chords chords = optionalChords.get();
+            System.out.println(chords);
         }
     }
 }
