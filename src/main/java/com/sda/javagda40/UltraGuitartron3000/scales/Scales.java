@@ -1,6 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.scales;
 
+//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "scales")
@@ -34,10 +37,14 @@ public class Scales {
     @Column(name = "seventh_note")
     private int seventhNote;
 
+//    @OneToMany(mappedBy = "scales", fetch = FetchType.LAZY)
+//    private List<Notes> notes;
+
     @ManyToOne
     private CountingScales countingScales;
 
-    public Scales(String scaleName, int firstNote, int secondNote, int thirdNote, int fourthNote, int fifthNote, int sixthNote, int seventhNote, CountingScales countingScales) {
+
+    public Scales(String scaleName, int firstNote, int secondNote, int thirdNote, int fourthNote, int fifthNote, int sixthNote, int seventhNote) {
         this.scaleName = scaleName;
         this.firstNote = firstNote;
         this.secondNote = secondNote;
@@ -46,7 +53,6 @@ public class Scales {
         this.fifthNote = fifthNote;
         this.sixthNote = sixthNote;
         this.seventhNote = seventhNote;
-        this.countingScales = countingScales;
     }
 
     public Scales() {

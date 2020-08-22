@@ -13,50 +13,63 @@ import java.util.List;
 import java.util.Optional;
 
 public class EntityDao<T> {
+    private final HibernateFactory hibernateFactory = new HibernateFactory();
+
     public void saveOrUpdate(T entity) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
 
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
-                transaction.rollback();
+               try{ transaction.rollback();}
+               catch(IllegalStateException ex){
+                   System.out.println("On już tu jest.");
+               }
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public Optional<T> findById(Class<T> classType, int id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+
         try (Session session = sessionFactory.openSession()) {
+            Thread.sleep(500L);
             return Optional.ofNullable(session.get(classType, id));
-        } catch (HibernateException he) {
+        } catch (HibernateException | InterruptedException he) {
             he.printStackTrace();
         }
         return Optional.empty();
     }
 
     public void delete(T entity) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
 
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
+            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public List<T> findAll(Class<T> classType) {
         List<T> list = new ArrayList<>();
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
 
             // narzędzie do tworzenia zapytań i kreowania klauzuli 'where'
@@ -78,7 +91,8 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-        } catch (HibernateException he) {
+            Thread.sleep(500L);
+        } catch (HibernateException | InterruptedException he) {
             he.printStackTrace();
         }
         return list;
