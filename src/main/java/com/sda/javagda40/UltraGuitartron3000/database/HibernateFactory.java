@@ -1,16 +1,16 @@
 package com.sda.javagda40.UltraGuitartron3000.database;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
 import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
-//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 public class HibernateFactory {
     private Configuration getHibernateConfig() {
@@ -21,7 +21,6 @@ public class HibernateFactory {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbc.JDBCDriver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
-//        configuration.addAnnotatedClass(Notes.class);
         configuration.addAnnotatedClass(Chords.class);
         configuration.addAnnotatedClass(Scales.class);
         configuration.addAnnotatedClass(CountingChords.class);

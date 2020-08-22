@@ -1,7 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.filling.FillingDB;
 import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
@@ -29,7 +28,7 @@ public class AppUGT {
         }
         System.out.println("Akordy do wyboru: " + chordNameList);
 
-        addingChords(chordsDAO);
+//        addingChords(chordsDAO);
         System.out.println("Podaj " + EXIT + " aby zakończyć aplikację.");
         String firstStep = choosingFirstStep(EXIT);
         String chordTypeChoice = choosingChordType(EXIT, chordNameList);
@@ -107,7 +106,8 @@ public class AppUGT {
         for (Chords chord : chordsDAO.findAll(Chords.class)) {
             if (chord.getChordName().equalsIgnoreCase(chordTypeChoice)) {
                 Optional<Chords> optionalChords = chordsDAO.findById(Chords.class, chord.getId());
-                optionalChords.ifPresent(chords -> System.out.println(ChordsController.gettingChordFromList(chords, primeNoteChoice)));
+//                optionalChords.ifPresent(chords -> System.out.println(ChordsController.gettingChordFromList(chords, primeNoteChoice)));
+                Chords foundChord = optionalChords.get();
             }
         }
     }
