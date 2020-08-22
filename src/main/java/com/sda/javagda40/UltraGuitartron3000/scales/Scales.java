@@ -3,7 +3,6 @@ package com.sda.javagda40.UltraGuitartron3000.scales;
 //import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "scales", uniqueConstraints = @UniqueConstraint(columnNames = "scale_name") )
@@ -11,7 +10,7 @@ public class Scales {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "scale_name")
     private String scaleName;
@@ -58,11 +57,11 @@ public class Scales {
     public Scales() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
