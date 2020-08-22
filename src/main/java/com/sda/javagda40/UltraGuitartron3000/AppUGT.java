@@ -10,9 +10,10 @@ import java.util.Optional;
 public class AppUGT {
 
     public static void main(String[] args) {
-//            FillingDB.fillingNotes();
-//            FillingDB.fillingChords();
-//            FillingDB.fillingScales();
+//        FillingDB.fillingNotes();
+//        FillingDB.fillingChords();
+//        FillingDB.fillingScales();
+//        FillingDB.fillingUsers();
         EntityDao<Chords> chordsDAO = new EntityDao<>();
         Optional<Chords> chordById = chordsDAO.findById(Chords.class, 4);
         System.out.println(chordById);

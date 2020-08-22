@@ -28,6 +28,7 @@ public class Trainee {
 
     public Trainee(String name) {
         this.name = name;
+        adminPermission = false;
     }
 
     public Trainee(String name, boolean adminPermission){
