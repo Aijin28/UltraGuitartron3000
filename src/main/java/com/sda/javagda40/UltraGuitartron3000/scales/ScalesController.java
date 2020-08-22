@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ScalesController {
     private static final SessionFactory factory = new HibernateFactory().getSessionFactory();
 
-    public static List<String> gettingScaleFromArray(Optional<Scales> optionalScales, String choice) {
+    public List<String> gettingScaleFromArray(Optional<Scales> optionalScales, String choice) {
         List<String> chosenScale = new ArrayList<>();
         if (optionalScales.isPresent()) {
             Scales scales = optionalScales.get();

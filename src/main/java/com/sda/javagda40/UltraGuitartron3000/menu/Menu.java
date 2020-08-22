@@ -22,8 +22,8 @@ public class Menu {
         this.scanner = scanner;
     }
 
-    public void startMainMenu(){
-        while(!f){
+    public void startMainMenu() {
+        while (!f) {
             System.out.println("Witaj w Ultra Guitartron 3000.\n" +
                     "_______________________________\n" +
                     "|         +M E N U+           |\n" +
@@ -34,22 +34,22 @@ public class Menu {
             int select;
             try {
                 select = scanner.nextInt();
-            } catch(InputMismatchException ime){
+            } catch (InputMismatchException ime) {
                 System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                 continue;
             }
-            switch(select){
+            switch (select) {
                 case 1:
                     System.out.println(userDao.findAll(Trainee.class));
                     System.out.println("Wybierz numer z listy: ");
                     try {
                         select = scanner.nextInt();
-                    } catch(InputMismatchException ime){
+                    } catch (InputMismatchException ime) {
                         System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                         continue;
                     }
                     userOptional = userDao.findById(Trainee.class, select);
-                    userOptional.ifPresent(x -> user=x);
+                    userOptional.ifPresent(x -> user = x);
                     userMenu(user);
                     break;
                 case 2:
@@ -62,7 +62,7 @@ public class Menu {
                     userMenu(user);
                     break;
                 case 3:
-                    f=true;
+                    f = true;
                     break;
                 default:
                     System.out.println("NIE MA TAKIEJ OPCJI!");
@@ -71,40 +71,34 @@ public class Menu {
         }
     }
 
-    public void userMenu(Trainee user){
-        boolean b = false;
+    public void userMenu(Trainee user) {
+        boolean working = true;
 
-        while(!b){
+        while (working) {
             int select;
-            if(user.isAdminPermission()){
-                ChordsController chordsController = new ChordsController();
-                ScalesController scalesController = new ScalesController();
-                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
-                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
+            if (user.isAdminPermission()) {
+//                ChordsController chordsController = new ChordsController();
+//                ScalesController scalesController = new ScalesController();
+//                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
+//                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
+                ChordsHandler chordsHandler = new ChordsHandler();
+                ScalesHandler scalesHandler = new ScalesHandler();
                 System.out.println("Co chcesz zrobić?\n" +
-                        "1.Znajdź akord\n" +
-                        "2.Znajdź skalę\n" +
-                        "3.Ćwicz akord\n" +
-                        "4.Ćwicz skalę\n" +
-                        "5.Dodaj akord\n" +
-                        "6.Dodaj skalę\n" +
-                        "7.Koniec\n");
+                        "1.Skale\n" +
+                        "2.Akordy\n" +
+                        "0.Koniec\n");
                 try {
-                    select = scanner.nextInt();
-                } catch(InputMismatchException ime){
+                    select = Integer.parseInt(scanner.nextLine());
+                } catch (InputMismatchException|NumberFormatException ime) {
                     System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                     continue;
                 }
-                switch (select){
+                switch (select) {
                     case 1:
-                        String chordRootNote = setRootNote();
-                        int selectedChord = selectChordType(chordsEntityDao);
-                        chordsController.gettingChordFromArray(chordById(chordsEntityDao, selectedChord), chordRootNote);
+                        chordsHandler.handle();
                         break;
                     case 2:
-                        String scaleRootNote = setRootNote();
-                        int selectedScale = selectScale(scalesEntityDao);
-                        scalesController.gettingScaleFromArray(scalesById(scalesEntityDao, selectedScale), scaleRootNote);
+                        scalesHandler.handle();
                         break;
                     case 3:
                         //dodać funkcję ćwiczenia akordu
@@ -113,13 +107,13 @@ public class Menu {
                         //dodać funkcję ćwiczenia skali
                         break;
                     case 5:
-                        addChord(chordsEntityDao);
+//                        addChord(chordsEntityDao);
                         break;
                     case 6:
-                        addScale(scalesEntityDao);
+//                        addScale(scalesEntityDao);
                         break;
                     case 7:
-                        b=true;
+                        working = false;
                         break;
                     default:
                         System.out.println("NIE MA TAKIEJ OPCJI!");
@@ -138,20 +132,20 @@ public class Menu {
                         "5.Koniec\n");
                 try {
                     select = scanner.nextInt();
-                } catch(InputMismatchException ime){
+                } catch (InputMismatchException ime) {
                     System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                     continue;
                 }
-                switch (select){
+                switch (select) {
                     case 1:
                         String chordRootNote = setRootNote();
                         int selectedChord = selectChordType(chordsEntityDao);
                         chordsController.gettingChordFromArray(chordById(chordsEntityDao, selectedChord), chordRootNote);
                         break;
                     case 2:
-                        String scaleRootNote = setRootNote();
-                        int selectedScale = selectScale(scalesEntityDao);
-                        scalesController.gettingScaleFromArray(scalesById(scalesEntityDao, selectedScale), scaleRootNote);
+//                        String scaleRootNote = setRootNote();
+//                        int selectedScale = selectScale(scalesEntityDao);
+//                        scalesController.gettingScaleFromArray(scalesById(scalesEntityDao, selectedScale), scaleRootNote);
                         break;
                     case 3:
                         //dodać funkcję ćwiczenia akordu
@@ -160,7 +154,7 @@ public class Menu {
                         //dodać funkcję ćwiczenia skali
                         break;
                     case 5:
-                        b=true;
+                        working = true;
                         break;
                     default:
                         System.out.println("NIE MA TAKIEJ OPCJI!");
@@ -170,74 +164,72 @@ public class Menu {
         }
     }
 
-    public String setRootNote(){
+    public String setRootNote() {
         System.out.println("Podaj prymę: ");
-         return scanner.nextLine();
+        return scanner.nextLine();
     }
 
-    public int selectChordType(EntityDao<Chords> chordsEntityDao){
+    public int selectChordType(EntityDao<Chords> chordsEntityDao) {
         int selectedChord;
-        while(true){
+        while (true) {
             System.out.println("Wybierz akord z listy: ");
             System.out.println(chordsEntityDao.findAll(Chords.class));
             try {
                 selectedChord = scanner.nextInt();
                 return selectedChord;
-            } catch(InputMismatchException ime){
+            } catch (InputMismatchException ime) {
                 System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
             }
         }
     }
 
-    public Optional<Chords> chordById(EntityDao entityDao, int id){
+    public Optional<Chords> chordById(EntityDao entityDao, int id) {
         return entityDao.findById(Chords.class, id);
     }
 
-    public int selectScale(EntityDao<Scales> scalesEntityDao){
+    public int selectScale(EntityDao<Scales> scalesEntityDao) {
         int selectedScale;
-        while (true){
+        while (true) {
             System.out.println("Wybierz skalę z listy: ");
             System.out.println(scalesEntityDao.findAll(Scales.class));
             try {
                 selectedScale = scanner.nextInt();
                 return selectedScale;
-            } catch(InputMismatchException ime){
+            } catch (InputMismatchException ime) {
                 System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
             }
         }
     }
 
-    public Optional<Scales> scalesById(EntityDao entityDao, int id){
-        return entityDao.findById(Scales.class, id);
-    }
 
-    public void addChord(EntityDao<Chords> chordsEntityDao){
-        while(true){
+    public void addChord(EntityDao<Chords> chordsEntityDao) {
+        Chords newlyCreated = null;
+        do {
             System.out.println("Podaj nazwę akordu: ");
             String name = scanner.nextLine();
-            try{
+            try {
                 System.out.println("Podaj pierwszą pozycję akordu: ");
-                int firstNote = scanner.nextInt();
+                int firstNote = Integer.parseInt(scanner.nextLine());
                 System.out.println("Podaj drugą pozycję akordu: ");
-                int secondNote = scanner.nextInt();
+                int secondNote = Integer.parseInt(scanner.nextLine());
                 System.out.println("Podaj trzecią pozycję akordu: ");
-                int thirdNote = scanner.nextInt();
+                int thirdNote = Integer.parseInt(scanner.nextLine());
                 System.out.println("Podaj czwartą pozycję akordu: ");
-                int fourthNote = scanner.nextInt();
-                chordsEntityDao.saveOrUpdate(new Chords(name, firstNote, secondNote, thirdNote, fourthNote));
+                int fourthNote = Integer.parseInt(scanner.nextLine());
+                newlyCreated = new Chords(name, firstNote, secondNote, thirdNote, fourthNote);
+                chordsEntityDao.saveOrUpdate(newlyCreated);
                 System.out.println("dodano akord: " + name);
-                break;
             } catch (InputMismatchException ime) {
                 System.out.println("Niewłaściwy zapis, wprowadź wartości jeszcze raz");
             }
-        }
+        } while (newlyCreated == null || newlyCreated.getId() == null);
     }
 
-    public void addScale(EntityDao<Scales> scalesEntityDao){
-        while(true){
+    public void addScale(EntityDao<Scales> scalesEntityDao) {
+        while (true) {
             System.out.println("Podaj nazwę akordu: ");
             String name = scanner.nextLine();
-            try{
+            try {
                 System.out.println("Podaj pierwszą pozycję akordu: ");
                 int firstNote = scanner.nextInt();
                 System.out.println("Podaj drugą pozycję akordu: ");

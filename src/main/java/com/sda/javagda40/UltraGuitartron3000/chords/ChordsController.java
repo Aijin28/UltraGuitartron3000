@@ -44,7 +44,7 @@ public class ChordsController {
 //        }
 //    }
 
-    public static List<String> gettingChordFromArray(Optional<Chords> optionalChord, String choice) {
+    public List<String> gettingChordFromArray(Optional<Chords> optionalChord, String choice) {
         List<String> chosenChord = new ArrayList<>();
         if (optionalChord.isPresent()) {
             Chords chord = optionalChord.get();

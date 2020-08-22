@@ -1,0 +1,119 @@
+/*C19*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C20*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C21*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C22*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C23*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C24*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C25*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C26*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C27*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C28*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C29*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C30*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C31*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C32*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C33*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C34*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)
+/*C35*/SET SCHEMA PUBLIC
+alter table chords drop constraint UKfet4ogbdnks4x000n67bd29tw
+alter table chords add constraint UKfet4ogbdnks4x000n67bd29tw unique (chord_name)
+alter table scales drop constraint UKbj1mjgrsgvtecosmx2myiclqi
+alter table scales add constraint UKbj1mjgrsgvtecosmx2myiclqi unique (scale_name)
+alter table trainee drop constraint UK6dx7vbh7cy5warvvt6iqbtmmw
+alter table trainee add constraint UK6dx7vbh7cy5warvvt6iqbtmmw unique (name)

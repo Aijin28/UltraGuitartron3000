@@ -10,7 +10,7 @@ public class Chords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "chord_name")
     private String chordName;
@@ -49,7 +49,7 @@ public class Chords {
 //        this.notes = notes;
 //    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
