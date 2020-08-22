@@ -1,7 +1,5 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
-//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +8,7 @@ public class Chords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "chord_name")
     private String chordName;
@@ -49,7 +47,7 @@ public class Chords {
 //        this.notes = notes;
 //    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -107,10 +105,11 @@ public class Chords {
 
     @Override
     public String toString() {
-        return "Chord name = '" + chordName + '\'' +
-                ": \nfirst note = " + firstNote +
-                ", second note = " + secondNote +
-                ", third note = " + thirdNote +
-                ", fourth note = " + fourthNote;
+        return "\nid: " + id +
+                ", chordName: " + chordName +
+                ", firstNote: " + firstNote +
+                ", secondNote: " + secondNote +
+                ", thirdNote: " + thirdNote +
+                ", fourthNote: " + fourthNote;
     }
 }

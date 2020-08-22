@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "trainee", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Trainee {
 
     @Id
@@ -14,6 +15,8 @@ public class Trainee {
     private int id;
 
     private String name;
+
+    private boolean adminPermission;
 
     @OneToMany(mappedBy = "trainee", fetch = FetchType.LAZY)
     @Column(name = "scales_practise")
@@ -25,6 +28,12 @@ public class Trainee {
 
     public Trainee(String name) {
         this.name = name;
+        adminPermission = false;
+    }
+
+    public Trainee(String name, boolean adminPermission){
+        this.name = name;
+        this.adminPermission = adminPermission;
     }
 
     public Trainee() {
@@ -52,5 +61,19 @@ public class Trainee {
 
     public void setCountingScalesList(List<CountingScales> countingScalesList) {
         this.countingScalesList = countingScalesList;
+    }
+
+    public boolean isAdminPermission() {
+        return adminPermission;
+    }
+
+    public void setAdminPermission(boolean adminPermission) {
+        this.adminPermission = adminPermission;
+    }
+
+    @Override
+    public String toString() {
+        return "\nid: " + id +
+                ", name: " + name;
     }
 }

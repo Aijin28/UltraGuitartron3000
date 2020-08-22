@@ -21,10 +21,16 @@ It allows to create user account, count how many times target chord/scale has be
 | **JDK**             | \>= 11      |
 | **Hibernate**       | \>= 5.4.xx  |
 | **MySQL Connector** | \>= 8.0.xx  |
+<<<<<<< HEAD
 | **HSQLDB**          | \>= 2.4.x   |
 | **Junit**           | \>= 4.11    |
 | **Javax**           | \>= 2.2.x   |
 | **Log4j2**          | \>= 2.13.x  |
+=======
+| **HSQLDB**          | \>= 2.3.x   |
+| **Junit**           | \>= 4.11    |
+| **Javax**           | \>= 2.2.x   |
+>>>>>>> Marek
 
 ##
 
@@ -41,6 +47,9 @@ It allows to create user account, count how many times target chord/scale has be
 
 * Declared as entity
 * Declared int and String fields
+
+### ScalesController
+* Implemented getting list of notes method
 
 ## chords
 
@@ -71,7 +80,21 @@ It allows to create user account, count how many times target chord/scale has be
 
 * Declared as entity;
 * Represents user of application;
+<<<<<<< HEAD
 
 ### NotesList
 
 * Contains list of notes used in chords and scales
+=======
+
+### NotesList
+
+* Contains list of notes used in chords and scales
+
+## filling
+
+### FillingDB
+
+* Filling database with chords
+* Filling database with scales
+>>>>>>> Marek

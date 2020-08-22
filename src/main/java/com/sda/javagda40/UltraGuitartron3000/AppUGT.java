@@ -2,7 +2,7 @@ package com.sda.javagda40.UltraGuitartron3000;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.filling.FillingDB;
+import com.sda.javagda40.UltraGuitartron3000.database.ScalesDao;
 import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 
@@ -19,7 +19,8 @@ public class AppUGT {
 
     public static void main(String[] args) {
         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        FillingDB.fillingChords();
+        ScalesDao scalesDao = new ScalesDao();
+        scalesDao.fillingScales();
         System.out.println("Lista prym do wyboru: " + NotesList.getNotesList().subList(0, NotesList.getNotesList().size() / 2));
         EntityDao<Chords> chordsDAO = new EntityDao<>();
         List<String> chordNameList = new ArrayList<>();

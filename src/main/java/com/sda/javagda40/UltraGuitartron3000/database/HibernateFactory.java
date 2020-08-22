@@ -10,8 +10,6 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-//import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
-
 public class HibernateFactory {
     private Configuration getHibernateConfig() {
         Configuration configuration = new Configuration();

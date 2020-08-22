@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "scales")
+@Table(name = "scales", uniqueConstraints = @UniqueConstraint(columnNames = "scale_name") )
 public class Scales {
 
     @Id
@@ -136,5 +136,18 @@ public class Scales {
 
     public void setCountingScales(CountingScales countingScales) {
         this.countingScales = countingScales;
+    }
+
+    @Override
+    public String toString() {
+        return "\nid: " + id +
+                ", scaleName: " + scaleName +
+                ", firstNote: " + firstNote +
+                ", secondNote: " + secondNote +
+                ", thirdNote: " + thirdNote +
+                ", fourthNote: " + fourthNote +
+                ", fifthNote: " + fifthNote +
+                ", sixthNote: " + sixthNote +
+                ", seventhNote: " + seventhNote;
     }
 }

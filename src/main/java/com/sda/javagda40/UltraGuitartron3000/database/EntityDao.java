@@ -15,15 +15,14 @@ import java.util.Optional;
 public class EntityDao<T> {
     private final HibernateFactory hibernateFactory = new HibernateFactory();
 
-    public void saveOrUpdate(T entity) {
+    public void saveOrUpdate(T entity){
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
-
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(entity);
+            session.flush();
             transaction.commit();
-            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                try{ transaction.rollback();}
@@ -31,18 +30,14 @@ public class EntityDao<T> {
                    System.out.println("On już tu jest.");
                }
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
-    public Optional<T> findById(Class<T> classType, int id) {
+    public Optional<T> findById(Class<T> classType, int id){
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-
         try (Session session = sessionFactory.openSession()) {
-            Thread.sleep(500L);
             return Optional.ofNullable(session.get(classType, id));
-        } catch (HibernateException | InterruptedException he) {
+        } catch (HibernateException  he) {
             he.printStackTrace();
         }
         return Optional.empty();
@@ -66,7 +61,7 @@ public class EntityDao<T> {
         }
     }
 
-    public List<T> findAll(Class<T> classType) {
+    public List<T> findAll(Class<T> classType){
         List<T> list = new ArrayList<>();
 
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
@@ -94,6 +89,11 @@ public class EntityDao<T> {
             Thread.sleep(500L);
         } catch (HibernateException | InterruptedException he) {
             he.printStackTrace();
+        }
+        try {
+            Thread.sleep(500L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return list;
     }
