@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -66,8 +67,8 @@ public class ScalesDao {
             // używanie klas których będziecie używać na JPA (Spring)
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        } catch (HibernateException | NoResultException he) {
+            System.err.println(he.getMessage() + " scale -- " + scaleChoice);
         }
         return Optional.empty();
     }
@@ -76,39 +77,39 @@ public class ScalesDao {
         EntityDao<Scales> scalesEntityDao = new EntityDao<>();
         ScalesDao scalesDao = new ScalesDao();
         if (scalesDao.findByScalesName("Jońska").isEmpty()) {
-            Scales ionian = new Scales("Jońska",1,3,5,6,8,10,12);
+            Scales ionian = new Scales("Jońska",0,2,4,5,7,9,11);
             scalesEntityDao.saveOrUpdate(ionian);
         }
         if (scalesDao.findByScalesName("Dorycka").isEmpty()) {
-            Scales dorian = new Scales("Dorycka",1,3,4,6,8,10,11);
+            Scales dorian = new Scales("Dorycka",0,2,3,5,7,9,10);
             scalesEntityDao.saveOrUpdate(dorian);
         }
         if (scalesDao.findByScalesName("Frygijska").isEmpty()) {
-            Scales phrygian = new Scales("Frygijska",1,2,4,6,8,9,11);
+            Scales phrygian = new Scales("Frygijska",0,1,3,5,7,8,10);
             scalesEntityDao.saveOrUpdate(phrygian);
         }
         if (scalesDao.findByScalesName("Lidyjska").isEmpty()) {
-            Scales lydian = new Scales("Lidyjska",1,3,5,7,8,10,12);
+            Scales lydian = new Scales("Lidyjska",0,2,4,6,7,9,11);
             scalesEntityDao.saveOrUpdate(lydian);
         }
         if (scalesDao.findByScalesName("Miksolidyjska").isEmpty()) {
-            Scales mixolydian = new Scales("Miksolidyjska",1,3,5,6,8,10,11);
+            Scales mixolydian = new Scales("Miksolidyjska",0,2,4,5,7,9,10);
             scalesEntityDao.saveOrUpdate(mixolydian);
         }
         if (scalesDao.findByScalesName("Eolska").isEmpty()) {
-            Scales aeolian = new Scales("Eolska",1,3,4,6,8,9,11);
+            Scales aeolian = new Scales("Eolska",0,2,3,5,7,8,10);
             scalesEntityDao.saveOrUpdate(aeolian);
         }
         if (scalesDao.findByScalesName("Lokrycka").isEmpty()) {
-            Scales locrian = new Scales("Lokrycka",1,2,4,6,8,9,11);
+            Scales locrian = new Scales("Lokrycka",0,1,3,5,6,8,10);
             scalesEntityDao.saveOrUpdate(locrian);
         }
         if (scalesDao.findByScalesName("Molowa harmoniczna").isEmpty()) {
-            Scales harmonicMinor = new Scales("Molowa harmoniczna", 1, 3, 4, 6, 8, 9, 12);
+            Scales harmonicMinor = new Scales("Molowa harmoniczna", 0, 2, 3, 5, 7, 8, 11);
             scalesEntityDao.saveOrUpdate(harmonicMinor);
         }
         if (scalesDao.findByScalesName("Frygijska dominantowa").isEmpty()) {
-            Scales phyrgianDominant = new Scales("Frygijska dominantowa", 1, 2, 5, 6, 8, 9, 11);
+            Scales phyrgianDominant = new Scales("Frygijska dominantowa", 0, 1, 4, 5, 7, 8, 10);
             scalesEntityDao.saveOrUpdate(phyrgianDominant);
         }
     }

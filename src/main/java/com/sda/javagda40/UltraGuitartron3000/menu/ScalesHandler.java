@@ -15,11 +15,12 @@ import java.util.Scanner;
 public class ScalesHandler {
 
     private final Scanner SCANNER;
-    private ScalesController scalesController;
+    private ScalesController scalesController = new ScalesController();
     EntityDao<Scales> scalesEntityDao = new EntityDao<>();
     private int select;
+    private Trainee user;
 
-    public void handle(Trainee user) {
+    public void handle() {
         boolean state = true;
         do{
             if (user.isAdminPermission()) {
@@ -147,33 +148,33 @@ public class ScalesHandler {
 
     private void scaleTraining(Trainee user){
         String scaleRootNote = NotesList.rootNoteRandomizer();
+        System.out.println("Twoja pryma to: " + scaleRootNote);
         int selectedScale = selectScale(scalesEntityDao);
         int checkedNotes = 0;
         System.out.println("Podaj pierwszy dźwięk skali: ");
-        String firstNote = SCANNER.nextLine();
+        String firstNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj drugi dźwięk skali: ");
-        String secondNote = SCANNER.nextLine();
+        String secondNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj trzeci dźwięk skali: ");
-        String thirdNote = SCANNER.nextLine();
+        String thirdNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj czwarty dźwięk skali: ");
-        String fourthNote = SCANNER.nextLine();
+        String fourthNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj piąty dźwięk skali: ");
-        String fifthNote = SCANNER.nextLine();
+        String fifthNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj szósty dźwięk skali: ");
-        String sixthNote = SCANNER.nextLine();
+        String sixthNote = SCANNER.nextLine().toUpperCase();
         System.out.println("Podaj siódmy dźwięk skali: ");
-        String seventhNote = SCANNER.nextLine();
+        String seventhNote = SCANNER.nextLine().toUpperCase();
         List<String> userGuessedNotes = Arrays.asList(firstNote, secondNote, thirdNote, fourthNote, fifthNote, sixthNote, seventhNote);
         List<String> guessedScaleNotes = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
-        for (String s : userGuessedNotes) {
-            int i = 0;
-            if(s.equals(guessedScaleNotes.get(i))){
+        for (int i = 0; i < userGuessedNotes.size(); i++) {
+            String s = userGuessedNotes.get(i);
+            if (s.equals(guessedScaleNotes.get(i))) {
                 System.out.print(s + "  ");
                 checkedNotes++;
             } else {
-                System.err.print(s + "  ");
+                System.out.print(s + "  ");
             }
-            i++;
         }
         System.out.println();
         for (String s : guessedScaleNotes){
@@ -182,8 +183,9 @@ public class ScalesHandler {
         System.out.println("Wynik: " + checkedNotes + "/7");
     }
 
-    public ScalesHandler(Scanner scanner) {
+    public ScalesHandler(Scanner scanner, Trainee user) {
         this.SCANNER = scanner;
+        this.user = user;
     }
 
 }

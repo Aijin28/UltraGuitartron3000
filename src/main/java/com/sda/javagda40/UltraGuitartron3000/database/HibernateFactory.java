@@ -19,6 +19,11 @@ public class HibernateFactory {
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbc.JDBCDriver");
         configuration.setProperty("hibernate.hbm2ddl.auto", "update");
+//          MYSQL
+//        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/musicdb?serverTimezone=Europe/Warsaw&createDatabaseIfNotExist=true");
+//        configuration.setProperty("hibernate.connection.username", "root");
+//        configuration.setProperty("hibernate.connection.password", "root");
+//        configuration.setProperty("hibernate.hbm2ddl.auto", "update");
         configuration.addAnnotatedClass(Chords.class);
         configuration.addAnnotatedClass(Scales.class);
         configuration.addAnnotatedClass(CountingChords.class);

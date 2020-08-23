@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -52,8 +53,8 @@ public class TraineeDao {
             // używanie klas których będziecie używać na JPA (Spring)
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        } catch (HibernateException | NoResultException he) {
+            System.err.println(he.getMessage() + " trainee -- " + traineeChoice);
         }
         return Optional.empty();
     }

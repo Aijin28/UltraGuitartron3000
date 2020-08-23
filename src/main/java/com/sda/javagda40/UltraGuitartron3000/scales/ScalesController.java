@@ -17,16 +17,14 @@ public class ScalesController {
             Scales scales = optionalScales.get();
             List<String> notesArray = NotesList.getNotesList();
             int zmienna = notesArray.indexOf(choice);
-//            -1 wykorzystane, ponieważ listy indexuje się od 0, a chciałem zachować prawidłową numerację stopni w akordach
-            chosenScale.add(notesArray.get(scales.getFirstNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getSecondNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getThirdNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getFourthNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getFifthNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getSixthNote() -1 + zmienna));
-            chosenScale.add(notesArray.get(scales.getSeventhNote() -1 + zmienna));
-            return chosenScale;
+            chosenScale.add(notesArray.get(scales.getFirstNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getSecondNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getThirdNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getFourthNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getFifthNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getSixthNote() + zmienna));
+            chosenScale.add(notesArray.get(scales.getSeventhNote() + zmienna));
         } else System.out.println("Nie ma takiej skali.");
-        return null;
+        return chosenScale;
     }
 }

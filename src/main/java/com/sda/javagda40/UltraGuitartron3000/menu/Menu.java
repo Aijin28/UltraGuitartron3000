@@ -3,6 +3,7 @@ package com.sda.javagda40.UltraGuitartron3000.menu;
 import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
+import com.sda.javagda40.UltraGuitartron3000.database.TraineeDao;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
 import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
@@ -29,7 +30,7 @@ public class Menu {
                     "|         +M E N U+           |\n" +
                     "|   1.Wybierz użytkownika     |\n" +
                     "|   2.Utwórz użytkownika      |\n" +
-                    "|   3.Zakończ                 |\n" +
+                    "|   0.Zakończ                 |\n" +
                     "_______________________________\n");
             int select;
             try {
@@ -55,13 +56,13 @@ public class Menu {
                 case 2:
                     System.out.println("Podaj nazwę nowego użytkownika: ");
                     String name;
-                    //Nie daję try catch do scanner.nextLine(); bo z nim nie ma takich problemów jak z nextInt()
                     name = scanner.nextLine();
-                    //Przydałoby się to poniższe obwarować, że jak próbujesz utworzyć nowego Trainee o name takim jak już jest w bazie danych, to że wyskakuje info, że nie możesz, bo taki użytkownik już istnieje, tymczasem jedyne wyskoczy to informacja "CHECKED"
-                    userDao.saveOrUpdate(new Trainee(name));
-                    userMenu(user);
+                    Trainee addedUser = new Trainee(name);
+                    userDao.saveOrUpdate(addedUser);
+                    System.out.println("Dodano nowego użytkownika: " + addedUser.getName());
                     break;
-                case 3:
+                case 0:
+                    System.out.println("Do widzenia!");
                     working = false;
                     break;
                 default:
@@ -82,11 +83,12 @@ public class Menu {
 //                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
 //                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
                 ChordsHandler chordsHandler = new ChordsHandler();
-                ScalesHandler scalesHandler = new ScalesHandler(scanner);
+                ScalesHandler scalesHandler = new ScalesHandler(scanner, user);
                 System.out.println("Co chcesz zrobić?\n" +
-                        "1.Skale\n" +
-                        "2.Akordy\n" +
-                        "0.Koniec\n");
+                        "1.Akordy\n" +
+                        "2.Skale\n" +
+                        "3.Usuń użytkownika\n" +
+                        "0.Powrót\n");
                 try {
                     select = Integer.parseInt(scanner.nextLine());
                 } catch (InputMismatchException|NumberFormatException ime) {
@@ -98,7 +100,11 @@ public class Menu {
                         chordsHandler.handle();
                         break;
                     case 2:
-                        scalesHandler.handle(user);
+                        scalesHandler.handle();
+                        break;
+                    case 3:
+                        userDao.delete(user);
+                        working = false;
                         break;
                     case 0:
                         working = false;
