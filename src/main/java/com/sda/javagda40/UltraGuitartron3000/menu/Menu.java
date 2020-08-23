@@ -57,7 +57,8 @@ public class Menu {
                     String name;
                     //Nie daję try catch do scanner.nextLine(); bo z nim nie ma takich problemów jak z nextInt()
                     name = scanner.nextLine();
-                    //Przydałoby się to poniższe obwarować, że jak próbujesz utworzyć nowego Trainee o name takim jak już jest w bazie danych, to że wyskakuje info, że nie możesz, bo taki użytkownik już istnieje, tymczasem jedyne wyskoczy to informacja "CHECKED"
+                    //Przydałoby się to poniższe obwarować, że jak próbujesz utworzyć nowego Trainee o name takim jak już jest w bazie danych, to że wyskakuje info,
+                    // że nie możesz, bo taki użytkownik już istnieje, tymczasem jedyne wyskoczy to informacja "CHECKED"
                     userDao.saveOrUpdate(new Trainee(name));
                     userMenu(user);
                     break;
