@@ -81,7 +81,7 @@ public class Menu {
 //                ScalesController scalesController = new ScalesController();
 //                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
 //                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
-                ChordsHandler chordsHandler = new ChordsHandler();
+                ChordsHandler chordsHandler = new ChordsHandler(scanner);
                 ScalesHandler scalesHandler = new ScalesHandler();
                 System.out.println("Co chcesz zrobić?\n" +
                         "1.Skale\n" +
@@ -202,28 +202,6 @@ public class Menu {
     }
 
 
-    public void addChord(EntityDao<Chords> chordsEntityDao) {
-        Chords newlyCreated = null;
-        do {
-            System.out.println("Podaj nazwę akordu: ");
-            String name = scanner.nextLine();
-            try {
-                System.out.println("Podaj pierwszą pozycję akordu: ");
-                int firstNote = Integer.parseInt(scanner.nextLine());
-                System.out.println("Podaj drugą pozycję akordu: ");
-                int secondNote = Integer.parseInt(scanner.nextLine());
-                System.out.println("Podaj trzecią pozycję akordu: ");
-                int thirdNote = Integer.parseInt(scanner.nextLine());
-                System.out.println("Podaj czwartą pozycję akordu: ");
-                int fourthNote = Integer.parseInt(scanner.nextLine());
-                newlyCreated = new Chords(name, firstNote, secondNote, thirdNote, fourthNote);
-                chordsEntityDao.saveOrUpdate(newlyCreated);
-                System.out.println("dodano akord: " + name);
-            } catch (InputMismatchException ime) {
-                System.out.println("Niewłaściwy zapis, wprowadź wartości jeszcze raz");
-            }
-        } while (newlyCreated == null || newlyCreated.getId() == null);
-    }
 
     public void addScale(EntityDao<Scales> scalesEntityDao) {
         while (true) {

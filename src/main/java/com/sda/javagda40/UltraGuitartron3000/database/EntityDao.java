@@ -15,7 +15,7 @@ import java.util.Optional;
 public class EntityDao<T> {
     private final HibernateFactory hibernateFactory = new HibernateFactory();
 
-    public void saveOrUpdate(T entity){
+    public void saveOrUpdate(T entity) {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
@@ -25,19 +25,16 @@ public class EntityDao<T> {
             transaction.commit();
         } catch (HibernateException he) {
             if (transaction != null) {
-               try{ transaction.rollback();}
-               catch(IllegalStateException ex){
-                   System.out.println("On już tu jest.");
-               }
+                transaction.rollback();
             }
         }
     }
 
-    public Optional<T> findById(Class<T> classType, int id){
+    public Optional<T> findById(Class<T> classType, int id) {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(classType, id));
-        } catch (HibernateException  he) {
+        } catch (HibernateException he) {
             he.printStackTrace();
         }
         return Optional.empty();
@@ -50,18 +47,16 @@ public class EntityDao<T> {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.delete(entity);
+            session.flush();
             transaction.commit();
-            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                 transaction.rollback();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
-    public List<T> findAll(Class<T> classType){
+    public List<T> findAll(Class<T> classType) {
         List<T> list = new ArrayList<>();
 
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
@@ -86,14 +81,9 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-            Thread.sleep(500L);
-        } catch (HibernateException | InterruptedException he) {
+            session.flush();
+        } catch (HibernateException he) {
             he.printStackTrace();
-        }
-        try {
-            Thread.sleep(500L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return list;
     }

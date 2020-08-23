@@ -4,6 +4,7 @@ import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,26 +16,25 @@ import java.util.Optional;
 public class ChordsDao {
     private final HibernateFactory hibernateFactory = new HibernateFactory();
 
-    // TODO: uzupełnić pozostałe chord'y - jeśli są w bazie, to nie dodajemy ich
     public void fillingChords(){
-        EntityDao<Chords> chordsDAO = new EntityDao<>();
+        EntityDao<Chords> chordsEntityDao = new EntityDao<>();
         ChordsDao chordDao = new ChordsDao();
-        if (!chordDao.findByChordName("maj7").isPresent()) {
+        if (chordDao.findByChordName("maj7").isEmpty()) {
             Chords xmaj7 = new Chords("maj7", 1, 5, 8, 12);
-            chordsDAO.saveOrUpdate(xmaj7);
+            chordsEntityDao.saveOrUpdate(xmaj7);
         }
-        if (!chordDao.findByChordName("7").isPresent()) {
+        if (chordDao.findByChordName("7").isEmpty()) {
             Chords x7 = new Chords("7", 1, 5, 8, 11);
-            chordsDAO.saveOrUpdate(x7);
+            chordsEntityDao.saveOrUpdate(x7);
         }
-        if (!chordDao.findByChordName("min7").isPresent()) {
+        if (chordDao.findByChordName("min7").isEmpty()) {
             Chords xmin7 = new Chords("min7", 1, 4, 8, 11);
-            chordsDAO.saveOrUpdate(xmin7);
+            chordsEntityDao.saveOrUpdate(xmin7);
 
         }
-        if (!chordDao.findByChordName("min7/5b").isPresent()) {
+        if (chordDao.findByChordName("min7/5b").isEmpty()) {
             Chords xmin75b = new Chords("min7/5b", 1, 4, 7, 11);
-            chordsDAO.saveOrUpdate(xmin75b);
+            chordsEntityDao.saveOrUpdate(xmin75b);
         }
     }
 
@@ -94,6 +94,23 @@ public class ChordsDao {
             he.printStackTrace();
         }
         return list;
+    }
+
+    public void delete(Integer id) {
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            Chords chordToDelete = (Chords) session.load(Chords.class, id);
+            session.delete(chordToDelete);
+            session.flush();
+            transaction.commit();
+        } catch (HibernateException he) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
 }

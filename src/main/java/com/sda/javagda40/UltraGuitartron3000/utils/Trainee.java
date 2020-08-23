@@ -12,7 +12,7 @@ public class Trainee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -39,8 +39,12 @@ public class Trainee {
     public Trainee() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setId(int id) {
@@ -55,14 +59,6 @@ public class Trainee {
         this.name = name;
     }
 
-    public List<CountingScales> getCountingScalesList() {
-        return countingScalesList;
-    }
-
-    public void setCountingScalesList(List<CountingScales> countingScalesList) {
-        this.countingScalesList = countingScalesList;
-    }
-
     public boolean isAdminPermission() {
         return adminPermission;
     }
@@ -73,7 +69,7 @@ public class Trainee {
 
     @Override
     public String toString() {
-        return "\nid: " + id +
-                ", name: " + name;
+        return "name: " + name +
+                ", is admin: " + adminPermission;
     }
 }

@@ -38,11 +38,6 @@ public class ScalesDao {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
-        try {
-            Thread.sleep(500L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return list;
     }
 
