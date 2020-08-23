@@ -3,8 +3,10 @@ package com.sda.javagda40.UltraGuitartron3000.utils;
 import java.util.*;
 
 public class NotesList {
+    private static final Random RANDOM = new Random();
     public static final List<String> notesList = new ArrayList<>
             (Arrays.asList(
+
                     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
                     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
 
@@ -12,10 +14,10 @@ public class NotesList {
         return notesList;
     }
 
-    private static final Random RANDOM = new Random();
 
     public static String choosingRootNote(Scanner SCANNER) {
-        System.out.println("Lista prym do wyboru: " + notesList.subList(0, NotesList.getNotesList().size() / 2));
+        System.out.println("Lista prym do wyboru: " 
+                           + notesList.subList(0, NotesList.getNotesList().size() / 2));
         System.out.println("Wybierz prymę: ");
         String rootNoteChoice = SCANNER.nextLine();
         boolean state = true;

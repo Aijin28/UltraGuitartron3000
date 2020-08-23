@@ -15,7 +15,7 @@ import java.util.Optional;
 public class EntityDao<T> {
     private final HibernateFactory hibernateFactory = new HibernateFactory();
 
-    public void saveOrUpdate(T entity){
+    public void saveOrUpdate(T entity) {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
@@ -30,11 +30,11 @@ public class EntityDao<T> {
         }
     }
 
-    public Optional<T> findById(Class<T> classType, int id){
+    public Optional<T> findById(Class<T> classType, int id) {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(classType, id));
-        } catch (HibernateException  he) {
+        } catch (HibernateException he) {
             he.printStackTrace();
         }
         return Optional.empty();
@@ -56,7 +56,7 @@ public class EntityDao<T> {
         }
     }
 
-    public List<T> findAll(Class<T> classType){
+    public List<T> findAll(Class<T> classType) {
         List<T> list = new ArrayList<>();
 
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
@@ -80,6 +80,9 @@ public class EntityDao<T> {
 
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
+
+
+            session.flush();
 
         } catch (HibernateException he) {
             he.printStackTrace();

@@ -44,6 +44,7 @@ public class Trainee {
     }
 
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -53,14 +54,6 @@ public class Trainee {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<CountingScales> getCountingScalesList() {
-        return countingScalesList;
-    }
-
-    public void setCountingScalesList(List<CountingScales> countingScalesList) {
-        this.countingScalesList = countingScalesList;
     }
 
     public boolean isAdminPermission() {
@@ -73,7 +66,7 @@ public class Trainee {
 
     @Override
     public String toString() {
-        return "\nid: " + id +
-                ", name: " + name;
+        return "name: " + name +
+                ", is admin: " + adminPermission;
     }
 }

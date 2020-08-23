@@ -57,6 +57,7 @@ public class Menu {
                     System.out.println("Podaj nazwę nowego użytkownika: ");
                     String name;
                     name = scanner.nextLine();
+
                     Trainee addedUser = new Trainee(name);
                     userDao.saveOrUpdate(addedUser);
                     System.out.println("Dodano nowego użytkownika: " + addedUser.getName());
@@ -82,6 +83,7 @@ public class Menu {
 //                ScalesController scalesController = new ScalesController();
 //                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
 //                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
+
                 ChordsHandler chordsHandler = new ChordsHandler();
                 ScalesHandler scalesHandler = new ScalesHandler(scanner, user);
                 System.out.println("Co chcesz zrobić?\n" +
@@ -113,6 +115,7 @@ public class Menu {
                         System.out.println("NIE MA TAKIEJ OPCJI!");
                         break;
                 }
+
 //            } else {
 //                ChordsController chordsController = new ChordsController();
 //                ScalesController scalesController = new ScalesController();
