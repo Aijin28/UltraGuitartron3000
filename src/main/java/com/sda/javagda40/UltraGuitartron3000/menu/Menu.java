@@ -98,7 +98,7 @@ public class Menu {
                         chordsHandler.handle();
                         break;
                     case 2:
-                        scalesHandler.handle();
+                        scalesHandler.handle(user);
                         break;
                     case 0:
                         working = false;

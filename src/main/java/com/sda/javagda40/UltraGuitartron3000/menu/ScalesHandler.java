@@ -5,8 +5,11 @@ import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
 import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
+import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ScalesHandler {
@@ -16,42 +19,71 @@ public class ScalesHandler {
     EntityDao<Scales> scalesEntityDao = new EntityDao<>();
     private int select;
 
-    public void handle() {
+    public void handle(Trainee user) {
         boolean state = true;
         do{
-            System.out.println("Co chcesz robić?\n" +
-                    "1.Znajdź skalę\n" +
-                    "2.Ćwicz skale\n" +
-                    "3.Dodaj skalę\n" +
-                    "4.Usuń skalę\n" +
-                    "0.Powrót\n");
-            try {
-                select = Integer.parseInt(SCANNER.nextLine());
-            } catch (InputMismatchException|NumberFormatException ime) {
-                System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
-            }
-            switch (select){
-                case 1:
-                    findScale();
-                    PressEnterKeyToContinue.pressEnterKeyToContinue();
-                    break;
-                case 2:
-                    //scale training
-                    break;
-                case 3:
-                    addScale(scalesEntityDao);
-                    PressEnterKeyToContinue.pressEnterKeyToContinue();
-                    break;
-                case 4:
-                    deleteScale();
-                    PressEnterKeyToContinue.pressEnterKeyToContinue();
-                    break;
-                case 0:
-                    state=false;
-                    break;
-                default:
-                    System.out.println("NIE MA TAKIEJ OPCJI!");
-                    break;
+            if (user.isAdminPermission()) {
+                System.out.println("Co chcesz robić?\n" +
+                        "1.Znajdź skalę\n" +
+                        "2.Ćwicz skale\n" +
+                        "3.Dodaj skalę\n" +
+                        "4.Usuń skalę\n" +
+                        "0.Powrót\n");
+                try {
+                    select = Integer.parseInt(SCANNER.nextLine());
+                } catch (InputMismatchException|NumberFormatException ime) {
+                    System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
+                }
+                switch (select){
+                    case 1:
+                        findScale();
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 2:
+                        scaleTraining(user);
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 3:
+                        addScale(scalesEntityDao);
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 4:
+                        deleteScale();
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 0:
+                        state=false;
+                        break;
+                    default:
+                        System.out.println("NIE MA TAKIEJ OPCJI!");
+                        break;
+                }
+            } else {
+                System.out.println("Co chcesz robić?\n" +
+                        "1.Znajdź skalę\n" +
+                        "2.Ćwicz skale\n" +
+                        "0.Powrót\n");
+                try {
+                    select = Integer.parseInt(SCANNER.nextLine());
+                } catch (InputMismatchException|NumberFormatException ime) {
+                    System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
+                }
+                switch (select){
+                    case 1:
+                        findScale();
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 2:
+                        scaleTraining(user);
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 0:
+                        state=false;
+                        break;
+                    default:
+                        System.out.println("NIE MA TAKIEJ OPCJI!");
+                        break;
+                }
             }
         }while(state);
     }
@@ -102,12 +134,52 @@ public class ScalesHandler {
     private void findScale(){
         String scaleRootNote = NotesList.choosingRootNote(SCANNER);
         int selectedScale = selectScale(scalesEntityDao);
-        scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
+        List<String> result = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
+        for (String x : result) {
+            System.out.print(x + "  ");
+        }
     }
 
     private void deleteScale(){
         int selectedScale = selectScale(scalesEntityDao);
         scalesEntityDao.delete(scalesEntityDao.findById(Scales.class, selectedScale).get());
+    }
+
+    private void scaleTraining(Trainee user){
+        String scaleRootNote = NotesList.rootNoteRandomizer();
+        int selectedScale = selectScale(scalesEntityDao);
+        int checkedNotes = 0;
+        System.out.println("Podaj pierwszy dźwięk skali: ");
+        String firstNote = SCANNER.nextLine();
+        System.out.println("Podaj drugi dźwięk skali: ");
+        String secondNote = SCANNER.nextLine();
+        System.out.println("Podaj trzeci dźwięk skali: ");
+        String thirdNote = SCANNER.nextLine();
+        System.out.println("Podaj czwarty dźwięk skali: ");
+        String fourthNote = SCANNER.nextLine();
+        System.out.println("Podaj piąty dźwięk skali: ");
+        String fifthNote = SCANNER.nextLine();
+        System.out.println("Podaj szósty dźwięk skali: ");
+        String sixthNote = SCANNER.nextLine();
+        System.out.println("Podaj siódmy dźwięk skali: ");
+        String seventhNote = SCANNER.nextLine();
+        List<String> userGuessedNotes = Arrays.asList(firstNote, secondNote, thirdNote, fourthNote, fifthNote, sixthNote, seventhNote);
+        List<String> guessedScaleNotes = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
+        for (String s : userGuessedNotes) {
+            int i = 0;
+            if(s.equals(guessedScaleNotes.get(i))){
+                System.out.print(s + "  ");
+                checkedNotes++;
+            } else {
+                System.err.print(s + "  ");
+            }
+            i++;
+        }
+        System.out.println();
+        for (String s : guessedScaleNotes){
+            System.out.print(s + "  ");
+        }
+        System.out.println("Wynik: " + checkedNotes + "/7");
     }
 
     public ScalesHandler(Scanner scanner) {
