@@ -21,18 +21,10 @@ It allows to create user account, count how many times target chord/scale has be
 | **JDK**             | \>= 11      |
 | **Hibernate**       | \>= 5.4.xx  |
 | **MySQL Connector** | \>= 8.0.xx  |
-<<<<<<< HEAD
 | **HSQLDB**          | \>= 2.4.x   |
 | **Junit**           | \>= 4.11    |
 | **Javax**           | \>= 2.2.x   |
 | **Log4j2**          | \>= 2.13.x  |
-=======
-| **HSQLDB**          | \>= 2.3.x   |
-| **Junit**           | \>= 4.11    |
-| **Javax**           | \>= 2.2.x   |
->>>>>>> Marek
-
-##
 
 # Packages and classes
 
@@ -63,7 +55,6 @@ It allows to create user account, count how many times target chord/scale has be
 * Declared as entity;
 * Declare int fields;
 
-
 ## database
 
 ### EntityDao
@@ -74,27 +65,31 @@ It allows to create user account, count how many times target chord/scale has be
 
 * Configures hibernate and creates session and connection to data base;
 
-## utils
+### ChordsDao
+
+* Sprecified Dao methods for Chords;
+
+### ScalesDao
+
+* Sprecified Dao methods for Scales;
+
+### TraineeDao
+
+* Sprecified Dao methods for Trainee;
+
+## trainee
 
 ### Trainee
 
 * Declared as entity;
 * Represents user of application;
-<<<<<<< HEAD
 
-### NotesList
+## utils
 
-* Contains list of notes used in chords and scales
-=======
-
-### NotesList
+### Notes
 
 * Contains list of notes used in chords and scales
 
-## filling
+### PressEnterKeyToContinue
 
-### FillingDB
-
-* Filling database with chords
-* Filling database with scales
->>>>>>> Marek
+* Used only as a checkpoint

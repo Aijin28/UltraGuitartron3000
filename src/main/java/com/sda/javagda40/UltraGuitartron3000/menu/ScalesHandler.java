@@ -3,9 +3,9 @@ package com.sda.javagda40.UltraGuitartron3000.menu;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -133,7 +133,7 @@ public class ScalesHandler {
     }
 
     private void findScale(){
-        String scaleRootNote = NotesList.choosingRootNote(SCANNER);
+        String scaleRootNote = Notes.choosingRootNote(SCANNER);
         int selectedScale = selectScale(scalesEntityDao);
         List<String> result = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
         for (String x : result) {
@@ -147,7 +147,7 @@ public class ScalesHandler {
     }
 
     private void scaleTraining(Trainee user){
-        String scaleRootNote = NotesList.rootNoteRandomizer();
+        String scaleRootNote = Notes.rootNoteRandomizer();
         System.out.println("Twoja pryma to: " + scaleRootNote);
         int selectedScale = selectScale(scalesEntityDao);
         int checkedNotes = 0;

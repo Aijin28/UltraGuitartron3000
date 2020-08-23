@@ -1,8 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.database;
 
-import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

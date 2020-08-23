@@ -4,7 +4,7 @@ import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class ChordsHandler {
                     break;
                 case 1:
                     System.out.println("Podaj prymę tego akordu: ");
-                    String rootNote = NotesList.choosingRootNote(SCANNER);
+                    String rootNote = Notes.choosingRootNote(SCANNER);
                     System.out.println("Jaki akord chcesz znaleźć?");
                     chordTypeChoice = CHORDS_CONTROLLER.choosingChordType(SCANNER);
                     byChordName = chordsDao.findByChordName(chordTypeChoice);
@@ -45,7 +45,7 @@ public class ChordsHandler {
                     PressEnterKeyToContinue.pressEnterKeyToContinue();
                     break;
                 case 2:
-                    String randomRootNote = NotesList.rootNoteRandomizer();
+                    String randomRootNote = Notes.rootNoteRandomizer();
                     System.out.println("Pryma, jaka bedziesz ćwiczyć, to: " + randomRootNote);
                     System.out.println("Jaki akord chcesz ćwiczyć?");
                     chordTypeChoice = CHORDS_CONTROLLER.choosingChordType(SCANNER);

@@ -1,6 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.chords;
 
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,22 +1,17 @@
 package com.sda.javagda40.UltraGuitartron3000.menu;
 
-import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.database.TraineeDao;
-import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
-import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Menu {
+    EntityDao<Trainee> userDao = new EntityDao<>();
     private Scanner scanner;
     private Optional<Trainee> userOptional;
     private Trainee user;
-    EntityDao<Trainee> userDao = new EntityDao<>();
 
     public Menu(Scanner scanner) {
         this.scanner = scanner;
@@ -84,37 +79,37 @@ public class Menu {
 //                EntityDao<Chords> chordsEntityDao = new EntityDao<>();
 //                EntityDao<Scales> scalesEntityDao = new EntityDao<>();
 
-                ChordsHandler chordsHandler = new ChordsHandler();
-                ScalesHandler scalesHandler = new ScalesHandler(scanner, user);
-                System.out.println("Co chcesz zrobić?\n" +
-                        "1.Akordy\n" +
-                        "2.Skale\n" +
-                        "3.Usuń użytkownika\n" +
-                        "0.Powrót\n");
-                try {
-                    select = Integer.parseInt(scanner.nextLine());
-                } catch (InputMismatchException|NumberFormatException ime) {
-                    System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
-                    continue;
-                }
-                switch (select) {
-                    case 1:
-                        chordsHandler.handle();
-                        break;
-                    case 2:
-                        scalesHandler.handle();
-                        break;
-                    case 3:
-                        userDao.delete(user);
-                        working = false;
-                        break;
-                    case 0:
-                        working = false;
-                        break;
-                    default:
-                        System.out.println("NIE MA TAKIEJ OPCJI!");
-                        break;
-                }
+            ChordsHandler chordsHandler = new ChordsHandler(scanner);
+            ScalesHandler scalesHandler = new ScalesHandler(scanner, user);
+            System.out.println("Co chcesz zrobić?\n" +
+                    "1.Akordy\n" +
+                    "2.Skale\n" +
+                    "3.Usuń użytkownika\n" +
+                    "0.Powrót\n");
+            try {
+                select = Integer.parseInt(scanner.nextLine());
+            } catch (InputMismatchException | NumberFormatException ime) {
+                System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
+                continue;
+            }
+            switch (select) {
+                case 1:
+                    chordsHandler.handle();
+                    break;
+                case 2:
+                    scalesHandler.handle();
+                    break;
+                case 3:
+                    userDao.delete(user);
+                    working = false;
+                    break;
+                case 0:
+                    working = false;
+                    break;
+                default:
+                    System.out.println("NIE MA TAKIEJ OPCJI!");
+                    break;
+            }
 
 //            } else {
 //                ChordsController chordsController = new ChordsController();

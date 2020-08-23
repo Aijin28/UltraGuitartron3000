@@ -4,7 +4,6 @@ import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.ScalesDao;
 import com.sda.javagda40.UltraGuitartron3000.database.TraineeDao;
 import com.sda.javagda40.UltraGuitartron3000.menu.Menu;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 
 import java.util.Scanner;

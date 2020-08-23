@@ -1,9 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.scales;
 
-import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.database.HibernateFactory;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
-import org.hibernate.SessionFactory;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +12,7 @@ public class ScalesController {
         List<String> chosenScale = new ArrayList<>();
         if (optionalScales.isPresent()) {
             Scales scales = optionalScales.get();
-            List<String> notesArray = NotesList.getNotesList();
+            List<String> notesArray = Notes.getNotesList();
             int zmienna = notesArray.indexOf(choice);
             chosenScale.add(notesArray.get(scales.getFirstNote() + zmienna));
             chosenScale.add(notesArray.get(scales.getSecondNote() + zmienna));

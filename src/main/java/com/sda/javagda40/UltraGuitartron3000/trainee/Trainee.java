@@ -1,4 +1,4 @@
-package com.sda.javagda40.UltraGuitartron3000.utils;
+package com.sda.javagda40.UltraGuitartron3000.trainee;
 
 import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
 import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;

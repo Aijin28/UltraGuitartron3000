@@ -2,7 +2,7 @@ package com.sda.javagda40.UltraGuitartron3000.utils;
 
 import java.util.*;
 
-public class NotesList {
+public class Notes {
     private static final Random RANDOM = new Random();
     public static final List<String> notesList = new ArrayList<>
             (Arrays.asList(
@@ -17,15 +17,15 @@ public class NotesList {
 
     public static String choosingRootNote(Scanner SCANNER) {
         System.out.println("Lista prym do wyboru: " 
-                           + notesList.subList(0, NotesList.getNotesList().size() / 2));
+                           + notesList.subList(0, Notes.getNotesList().size() / 2));
         System.out.println("Wybierz prymę: ");
         String rootNoteChoice = SCANNER.nextLine();
         boolean state = true;
         do {
-            if (!NotesList.getNotesList().contains(rootNoteChoice.toUpperCase())) {
+            if (!Notes.getNotesList().contains(rootNoteChoice.toUpperCase())) {
                 System.out.println("Została podana błędna pryma.");
                 rootNoteChoice = SCANNER.nextLine();
-            } else if (NotesList.getNotesList().contains(rootNoteChoice.toUpperCase())) {
+            } else if (Notes.getNotesList().contains(rootNoteChoice.toUpperCase())) {
                 state = false;
             }
         } while (state);
@@ -33,7 +33,7 @@ public class NotesList {
     }
 
     public static String rootNoteRandomizer() {
-        int random = RANDOM.nextInt(NotesList.getNotesList().size());
-        return NotesList.getNotesList().get(random);
+        int random = RANDOM.nextInt(Notes.getNotesList().size());
+        return Notes.getNotesList().get(random);
     }
 }

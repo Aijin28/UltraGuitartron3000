@@ -3,7 +3,7 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 
 import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ public class ChordsController {
 
     public List<String> gettingChordWithNotes(Optional<Chords> optionalChord, String choice) {
         List<String> chosenChord = new ArrayList<>();
-        List<String> notesArray = NotesList.getNotesList();
+        List<String> notesArray = Notes.getNotesList();
         int firstNoteIndex = notesArray.indexOf(choice.toUpperCase());
         if (optionalChord.isPresent()) {
             Chords chord = optionalChord.get();
