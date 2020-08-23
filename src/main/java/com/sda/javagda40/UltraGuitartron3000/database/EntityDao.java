@@ -25,10 +25,7 @@ public class EntityDao<T> {
             transaction.commit();
         } catch (HibernateException he) {
             if (transaction != null) {
-               try{ transaction.rollback();}
-               catch(IllegalStateException ex){
-                   System.out.println("On już tu jest.");
-               }
+                transaction.rollback();
             }
         }
     }
@@ -50,14 +47,12 @@ public class EntityDao<T> {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.delete(entity);
+            session.flush();
             transaction.commit();
-            Thread.sleep(500L);
         } catch (HibernateException he) {
             if (transaction != null) {
                 transaction.rollback();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
@@ -86,14 +81,8 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-            Thread.sleep(500L);
-        } catch (HibernateException | InterruptedException he) {
+        } catch (HibernateException he) {
             he.printStackTrace();
-        }
-        try {
-            Thread.sleep(500L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return list;
     }

@@ -11,7 +11,7 @@ public class CountingChords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "time_practised")
     private int timePractised;
