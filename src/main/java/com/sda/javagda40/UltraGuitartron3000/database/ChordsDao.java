@@ -63,7 +63,8 @@ public class ChordsDao {
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
         } catch (HibernateException | NoResultException he) {
-            System.err.println(he.getMessage());
+
+            System.err.println(he.getMessage() + " chord -- " + chordTypeChoice);
         }
         return Optional.empty();
     }

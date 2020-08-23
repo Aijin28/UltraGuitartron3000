@@ -3,7 +3,6 @@ package com.sda.javagda40.UltraGuitartron3000.scales;
 //import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "scales", uniqueConstraints = @UniqueConstraint(columnNames = "scale_name") )
