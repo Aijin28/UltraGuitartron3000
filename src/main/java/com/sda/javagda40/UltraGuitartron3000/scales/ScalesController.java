@@ -1,9 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.scales;
 
-import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.database.HibernateFactory;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
-import org.hibernate.SessionFactory;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +10,18 @@ public class ScalesController {
 
     public List<String> gettingScaleFromArray(Optional<Scales> optionalScales, String choice) {
         List<String> chosenScale = new ArrayList<>();
+        List<String> notesArray = Notes.getNotesList();
+        int zmienna = notesArray.indexOf(choice);
         if (optionalScales.isPresent()) {
             Scales scales = optionalScales.get();
-            List<String> notesArray = NotesList.getNotesList();
-            int zmienna = notesArray.indexOf(choice);
-            chosenScale.add(notesArray.get(scales.getFirstNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getSecondNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getThirdNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getFourthNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getFifthNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getSixthNote() + zmienna));
-            chosenScale.add(notesArray.get(scales.getSeventhNote() + zmienna));
+//            nie wiem dlaczego, ale jak dałem + 1 to działa xD
+            chosenScale.add(notesArray.get(scales.getFirstNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getSecondNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getThirdNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getFourthNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getFifthNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getSixthNote() + 1 + zmienna));
+            chosenScale.add(notesArray.get(scales.getSeventhNote() + 1 + zmienna));
         } else System.out.println("Nie ma takiej skali.");
         return chosenScale;
     }

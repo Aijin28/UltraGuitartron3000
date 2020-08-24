@@ -140,13 +140,6 @@ public class Scales {
     @Override
     public String toString() {
         return "\nid: " + id +
-                ", scaleName: " + scaleName +
-                ", firstNote: " + firstNote +
-                ", secondNote: " + secondNote +
-                ", thirdNote: " + thirdNote +
-                ", fourthNote: " + fourthNote +
-                ", fifthNote: " + fifthNote +
-                ", sixthNote: " + sixthNote +
-                ", seventhNote: " + seventhNote;
+                ", scaleName: " + scaleName;
     }
 }

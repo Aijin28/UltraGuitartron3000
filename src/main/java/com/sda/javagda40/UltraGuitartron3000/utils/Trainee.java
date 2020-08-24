@@ -66,7 +66,8 @@ public class Trainee {
 
     @Override
     public String toString() {
-        return "name: " + name +
-                ", is admin: " + adminPermission;
+        return  "\nid=" + id +
+                ", name='" + name + '\'' +
+                ", adminPermission=" + adminPermission;
     }
 }

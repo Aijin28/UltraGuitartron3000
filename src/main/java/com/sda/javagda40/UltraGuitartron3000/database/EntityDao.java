@@ -43,7 +43,6 @@ public class EntityDao<T> {
     public void delete(T entity) {
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
         Transaction transaction = null;
-
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             session.delete(entity);
@@ -81,8 +80,6 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-
-            session.flush();
 
         } catch (HibernateException he) {
             he.printStackTrace();

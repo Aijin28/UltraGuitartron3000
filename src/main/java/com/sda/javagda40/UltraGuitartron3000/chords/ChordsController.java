@@ -3,7 +3,7 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 
 import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ public class ChordsController {
 
     public List<String> gettingChordWithNotes(Optional<Chords> optionalChord, String choice) {
         List<String> chosenChord = new ArrayList<>();
-        List<String> notesArray = NotesList.getNotesList();
+        List<String> notesArray = Notes.getNotesList();
         int firstNoteIndex = notesArray.indexOf(choice.toUpperCase());
         if (optionalChord.isPresent()) {
             Chords chord = optionalChord.get();
@@ -30,13 +30,13 @@ public class ChordsController {
             String name = SCANNER.nextLine();
             try {
                 System.out.println("Podaj pierwszą pozycję akordu: ");
-                int firstNote = Integer.parseInt(SCANNER.nextLine());
+                int firstNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj drugą pozycję akordu: ");
-                int secondNote = Integer.parseInt(SCANNER.nextLine());
+                int secondNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj trzecią pozycję akordu: ");
-                int thirdNote = Integer.parseInt(SCANNER.nextLine());
+                int thirdNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj czwartą pozycję akordu: ");
-                int fourthNote = Integer.parseInt(SCANNER.nextLine());
+                int fourthNote = Notes.noteInsert(SCANNER);
                 newlyCreated = new Chords(name, firstNote, secondNote, thirdNote, fourthNote);
                 chordsEntityDao.saveOrUpdate(newlyCreated);
                 System.out.println("Dodano akord: " + name + " 👌");
@@ -54,13 +54,13 @@ public class ChordsController {
         List<String> chordNameList = chordsDao.findChordNames();
         boolean state = true;
         do {
-            if (!chordNameList.contains(chordTypeChoice.toLowerCase())) {
+            if (!chordNameList.contains(chordTypeChoice)) {
                 System.out.println("Został podany błędny akord.");
                 chordTypeChoice = SCANNER.nextLine();
-            } else  {
-                    state = false;}
+            } else {
+                state = false;
+            }
         } while (state);
         return chordTypeChoice;
     }
-
 }

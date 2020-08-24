@@ -3,39 +3,45 @@ package com.sda.javagda40.UltraGuitartron3000.menu;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
-import com.sda.javagda40.UltraGuitartron3000.utils.NotesList;
+import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ScalesHandler {
 
     private final Scanner SCANNER;
-    private ScalesController scalesController = new ScalesController();
     EntityDao<Scales> scalesEntityDao = new EntityDao<>();
+    private ScalesController scalesController = new ScalesController();
     private int select;
     private Trainee user;
 
+    public ScalesHandler(Scanner scanner, Trainee user) {
+        this.SCANNER = scanner;
+        this.user = user;
+    }
+
     public void handle() {
         boolean state = true;
-        do{
+        do {
             if (user.isAdminPermission()) {
-                System.out.println("Co chcesz robić?\n" +
-                        "1.Znajdź skalę\n" +
-                        "2.Ćwicz skale\n" +
-                        "3.Dodaj skalę\n" +
-                        "4.Usuń skalę\n" +
-                        "0.Powrót\n");
+                System.out.println(
+                                "----------------------------\n" +
+                                "|        +S K A L E+       |\n" +
+                                "|      1.Znajdź skalę      |\n" +
+                                "|      2.Ćwicz skalę       |\n" +
+                                "|      3.Dodaj skalę       |\n" +
+                                "|      4.Usuń skalę        |\n" +
+                                "|      0.Powrót            |\n" +
+                                "|                          |\n" +
+                                "----------------------------\n");
                 try {
                     select = Integer.parseInt(SCANNER.nextLine());
-                } catch (InputMismatchException|NumberFormatException ime) {
+                } catch (InputMismatchException | NumberFormatException ime) {
                     System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                 }
-                switch (select){
+                switch (select) {
                     case 1:
                         findScale();
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
@@ -53,23 +59,27 @@ public class ScalesHandler {
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
                     case 0:
-                        state=false;
+                        state = false;
                         break;
                     default:
                         System.out.println("NIE MA TAKIEJ OPCJI!");
                         break;
                 }
             } else {
-                System.out.println("Co chcesz robić?\n" +
-                        "1.Znajdź skalę\n" +
-                        "2.Ćwicz skale\n" +
-                        "0.Powrót\n");
+                System.out.println(
+                                "----------------------------\n" +
+                                "|        +S K A L E+       |\n" +
+                                "|      1.Znajdź skalę      |\n" +
+                                "|      2.Ćwicz skalę       |\n" +
+                                "|      0.Powrót            |\n" +
+                                "|                          |\n" +
+                                "----------------------------\n");
                 try {
                     select = Integer.parseInt(SCANNER.nextLine());
-                } catch (InputMismatchException|NumberFormatException ime) {
+                } catch (InputMismatchException | NumberFormatException ime) {
                     System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                 }
-                switch (select){
+                switch (select) {
                     case 1:
                         findScale();
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
@@ -79,14 +89,14 @@ public class ScalesHandler {
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
                     case 0:
-                        state=false;
+                        state = false;
                         break;
                     default:
                         System.out.println("NIE MA TAKIEJ OPCJI!");
                         break;
                 }
             }
-        }while(state);
+        } while (state);
     }
 
     private void addScale(EntityDao<Scales> scalesEntityDao) {
@@ -96,19 +106,19 @@ public class ScalesHandler {
             String name = SCANNER.nextLine();
             try {
                 System.out.println("Podaj pierwszą pozycję skali: ");
-                int firstNote = Integer.parseInt(SCANNER.nextLine());
+                int firstNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj drugą pozycję skali: ");
-                int secondNote = Integer.parseInt(SCANNER.nextLine());
+                int secondNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj trzecią pozycję skali: ");
-                int thirdNote = Integer.parseInt(SCANNER.nextLine());
+                int thirdNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj czwartą pozycję skali: ");
-                int fourthNote = Integer.parseInt(SCANNER.nextLine());
+                int fourthNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj piątą pozycję skali: ");
-                int fifthNote = Integer.parseInt(SCANNER.nextLine());
+                int fifthNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj szóstą pozycję skali: ");
-                int sixthNote = Integer.parseInt(SCANNER.nextLine());
+                int sixthNote = Notes.noteInsert(SCANNER);
                 System.out.println("Podaj siódmą pozycję skali: ");
-                int seventhNote = Integer.parseInt(SCANNER.nextLine());
+                int seventhNote = Notes.noteInsert(SCANNER);
                 newlyCreated = new Scales(name, firstNote, secondNote, thirdNote, fourthNote, fifthNote, sixthNote, seventhNote);
                 scalesEntityDao.saveOrUpdate(newlyCreated);
                 System.out.println("dodano skalę: " + name);
@@ -122,7 +132,10 @@ public class ScalesHandler {
         int selectedScale;
         while (true) {
             System.out.println("Wybierz skalę z listy: ");
-            System.out.println(scalesEntityDao.findAll(Scales.class));
+            List<Scales> scalesList = scalesEntityDao.findAll(Scales.class);
+            for (Scales scale : scalesList) {
+                System.out.println(scale.getId() + ". " + scale.getScaleName());
+            }
             try {
                 selectedScale = Integer.parseInt(SCANNER.nextLine());
                 return selectedScale;
@@ -132,22 +145,24 @@ public class ScalesHandler {
         }
     }
 
-    private void findScale(){
-        String scaleRootNote = NotesList.choosingRootNote(SCANNER);
+    private void findScale() {
+        String scaleRootNote = Notes.choosingRootNote(SCANNER);
         int selectedScale = selectScale(scalesEntityDao);
-        List<String> result = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
+        Optional<Scales> scaleById = scalesEntityDao.findById(Scales.class, selectedScale);
+        List<String> result = scalesController.gettingScaleFromArray(scaleById, scaleRootNote);
         for (String x : result) {
             System.out.print(x + "  ");
         }
+        System.out.println();
     }
 
-    private void deleteScale(){
+    private void deleteScale() {
         int selectedScale = selectScale(scalesEntityDao);
         scalesEntityDao.delete(scalesEntityDao.findById(Scales.class, selectedScale).get());
     }
 
-    private void scaleTraining(Trainee user){
-        String scaleRootNote = NotesList.rootNoteRandomizer();
+    private void scaleTraining(Trainee user) {
+        String scaleRootNote = Notes.rootNoteRandomizer();
         System.out.println("Twoja pryma to: " + scaleRootNote);
         int selectedScale = selectScale(scalesEntityDao);
         int checkedNotes = 0;
@@ -177,15 +192,10 @@ public class ScalesHandler {
             }
         }
         System.out.println();
-        for (String s : guessedScaleNotes){
+        for (String s : guessedScaleNotes) {
             System.out.print(s + "  ");
         }
-        System.out.println("Wynik: " + checkedNotes + "/7");
-    }
-
-    public ScalesHandler(Scanner scanner, Trainee user) {
-        this.SCANNER = scanner;
-        this.user = user;
+        System.out.println("Wynik: " + checkedNotes + "/" + guessedScaleNotes.size());
     }
 
 }
