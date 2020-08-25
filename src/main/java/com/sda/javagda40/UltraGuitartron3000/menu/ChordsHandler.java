@@ -6,7 +6,7 @@ import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import java.util.*;
 
@@ -25,8 +25,6 @@ public class ChordsHandler {
 
     public void handle() {
         boolean state = true;
-        String chordTypeChoice;
-        Optional<Chords> byChordName;
         if (TRAINEE.isAdminPermission())
             adminChordHandler(state);
         else
@@ -108,7 +106,7 @@ public class ChordsHandler {
         String chordTypeChoice;
         do {
             System.out.println(
-                    "------------------------------\n" +
+                            "------------------------------\n" +
                             "|        +A K O R D Y+       |\n" +
                             "|      1.Znajdź akord        |\n" +
                             "|      2.Ćwicz akord         |\n" +

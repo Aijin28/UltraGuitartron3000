@@ -1,8 +1,6 @@
 package com.sda.javagda40.UltraGuitartron3000.database;
 
-import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
-import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,12 +18,12 @@ public class TraineeDao {
     public void fillingUsers() {
         EntityDao<Trainee> traineeEntityDao = new EntityDao<>();
         TraineeDao traineeDao = new TraineeDao();
-        if (traineeDao.findByUserName("admin").isEmpty()) {
-            Trainee admin = new Trainee("admin", true);
+        if (traineeDao.findByUserName("Admin").isEmpty()) {
+            Trainee admin = new Trainee("Admin", true);
             traineeEntityDao.saveOrUpdate(admin);
         }
-        if (traineeDao.findByUserName("user").isEmpty()) {
-            Trainee user = new Trainee("user");
+        if (traineeDao.findByUserName("User").isEmpty()) {
+            Trainee user = new Trainee("User");
             traineeEntityDao.saveOrUpdate(user);
         }
     }
@@ -54,7 +52,7 @@ public class TraineeDao {
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
         } catch (HibernateException | NoResultException he) {
-            System.err.println(he.getMessage() + " trainee -- " + traineeChoice);
+            System.err.println(he.getMessage() + ". Loading trainee -- " + traineeChoice);
         }
         return Optional.empty();
     }

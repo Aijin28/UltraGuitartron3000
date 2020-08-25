@@ -21,9 +21,6 @@ public class Chords {
     private int thirdNote;
     @Column(name = "fourth_note")
     private int fourthNote;
-//
-//    @OneToMany(mappedBy = "chords", fetch = FetchType.LAZY)
-//    private List<Notes> notes;
 
     @ManyToOne
     private CountingChords countingChords;
@@ -38,15 +35,6 @@ public class Chords {
 
     public Chords() {
     }
-
-//    public List<Notes> getNotes() {
-//        return notes;
-//    }
-//
-//    public void setNotes(List<Notes> notes) {
-//        this.notes = notes;
-//    }
-
 
     public Integer getId() {
         return id;

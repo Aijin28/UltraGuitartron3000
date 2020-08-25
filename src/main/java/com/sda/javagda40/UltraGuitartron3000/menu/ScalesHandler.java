@@ -3,9 +3,9 @@ package com.sda.javagda40.UltraGuitartron3000.menu;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
 import com.sda.javagda40.UltraGuitartron3000.scales.ScalesController;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
 
 import java.util.*;
 
@@ -27,15 +27,16 @@ public class ScalesHandler {
         do {
             if (user.isAdminPermission()) {
                 System.out.println(
-                                "----------------------------\n" +
-                                "|        +S K A L E+       |\n" +
-                                "|      1.Znajdź skalę      |\n" +
-                                "|      2.Ćwicz skalę       |\n" +
-                                "|      3.Dodaj skalę       |\n" +
-                                "|      4.Usuń skalę        |\n" +
-                                "|      0.Powrót            |\n" +
-                                "|                          |\n" +
-                                "----------------------------\n");
+                                "------------------------------\n" +
+                                "|         +S K A L E+        |\n" +
+                                "|      1.Znajdź skalę        |\n" +
+                                "|      2.Ćwicz skalę         |\n" +
+                                "|      3.Wypisz stopnie      |\n" +
+                                "|      3.Dodaj skalę         |\n" +
+                                "|      4.Usuń skalę          |\n" +
+                                "|      0.Powrót              |\n" +
+                                "|                            |\n" +
+                                "------------------------------\n");
                 try {
                     select = Integer.parseInt(SCANNER.nextLine());
                 } catch (InputMismatchException | NumberFormatException ime) {
@@ -51,10 +52,15 @@ public class ScalesHandler {
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
                     case 3:
-                        addScale(scalesEntityDao);
+                        List<Scales> allScales = scalesEntityDao.findAll(Scales.class);
+                        printingScales(allScales);
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
                     case 4:
+                        addScale(scalesEntityDao);
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
+                    case 5:
                         deleteScale();
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
@@ -67,13 +73,14 @@ public class ScalesHandler {
                 }
             } else {
                 System.out.println(
-                                "----------------------------\n" +
-                                "|        +S K A L E+       |\n" +
-                                "|      1.Znajdź skalę      |\n" +
-                                "|      2.Ćwicz skalę       |\n" +
-                                "|      0.Powrót            |\n" +
-                                "|                          |\n" +
-                                "----------------------------\n");
+                                "------------------------------\n" +
+                                "|         +S K A L E+        |\n" +
+                                "|      1.Znajdź skalę        |\n" +
+                                "|      2.Ćwicz skalę         |\n" +
+                                "|      3.Wypisz stopnie      |\n" +
+                                "|      0.Powrót              |\n" +
+                                "|                            |\n" +
+                                "------------------------------\n");
                 try {
                     select = Integer.parseInt(SCANNER.nextLine());
                 } catch (InputMismatchException | NumberFormatException ime) {
@@ -88,6 +95,11 @@ public class ScalesHandler {
                         scaleTraining(user);
                         PressEnterKeyToContinue.pressEnterKeyToContinue();
                         break;
+                    case 3:
+                        List<Scales> allScales = scalesEntityDao.findAll(Scales.class);
+                        printingScales(allScales);
+                        PressEnterKeyToContinue.pressEnterKeyToContinue();
+                        break;
                     case 0:
                         state = false;
                         break;
@@ -97,6 +109,20 @@ public class ScalesHandler {
                 }
             }
         } while (state);
+    }
+
+    private void printingScales(List<Scales> allScales) {
+        for (Scales scale :
+                allScales) {
+            System.out.println(scale.getScaleName() + ": " +
+                    (scale.getFirstNote() + 1) + ", " +
+                    (scale.getSecondNote() + 1) + ", " +
+                    (scale.getThirdNote() + 1) + ", " +
+                    (scale.getFourthNote() + 1) + ", " +
+                    (scale.getFifthNote() + 1) + ", " +
+                    (scale.getSixthNote() + 1) + ", " +
+                    (scale.getSeventhNote() + 1));
+        }
     }
 
     private void addScale(EntityDao<Scales> scalesEntityDao) {
@@ -158,7 +184,9 @@ public class ScalesHandler {
 
     private void deleteScale() {
         int selectedScale = selectScale(scalesEntityDao);
-        scalesEntityDao.delete(scalesEntityDao.findById(Scales.class, selectedScale).get());
+        Scales deletableScale = scalesEntityDao.findById(Scales.class, selectedScale).get();
+        System.out.println("Skala " + deletableScale.getScaleName() + " została usunięta.");
+        scalesEntityDao.delete(deletableScale);
     }
 
     private void scaleTraining(Trainee user) {

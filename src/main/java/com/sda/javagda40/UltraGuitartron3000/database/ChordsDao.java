@@ -31,7 +31,6 @@ public class ChordsDao {
         if (chordDao.findByChordName("min7").isEmpty()) {
             Chords xmin7 = new Chords("min7", 0, 3, 7, 10);
             chordsEntityDao.saveOrUpdate(xmin7);
-
         }
         if (chordDao.findByChordName("min7/5b").isEmpty()) {
             Chords xmin75b = new Chords("min7/5b", 0, 3, 6, 10);
@@ -63,8 +62,7 @@ public class ChordsDao {
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
         } catch (HibernateException | NoResultException he) {
-
-            System.err.println(he.getMessage() + " chord -- " + chordTypeChoice);
+            System.err.println(he.getMessage() + ". Loading chord -- " + chordTypeChoice);
         }
         return Optional.empty();
     }
@@ -72,7 +70,6 @@ public class ChordsDao {
     public List<String> findChordNames() {
         List<String> list = new ArrayList<>();
         SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
-
             try (Session session = sessionFactory.openSession()) {
 
                 // narzędzie do tworzenia zapytań i kreowania klauzuli 'where'
@@ -92,7 +89,6 @@ public class ChordsDao {
                 // używanie klas których będziecie używać na JPA (Spring)
 
                 list.addAll(session.createQuery(criteriaQuery).list());
-
             } catch (HibernateException he) {
                 he.printStackTrace();
             }

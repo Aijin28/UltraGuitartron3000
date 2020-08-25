@@ -80,7 +80,6 @@ public class EntityDao<T> {
             // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
             // używanie klas których będziecie używać na JPA (Spring)
 
-
         } catch (HibernateException he) {
             he.printStackTrace();
         }

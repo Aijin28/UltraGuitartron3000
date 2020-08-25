@@ -68,7 +68,7 @@ public class ScalesDao {
 
             return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
         } catch (HibernateException | NoResultException he) {
-            System.err.println(he.getMessage() + " scale -- " + scaleChoice);
+            System.err.println(he.getMessage() + ". Loading scale -- " + scaleChoice);
         }
         return Optional.empty();
     }

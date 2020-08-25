@@ -4,7 +4,7 @@ import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.chords.CountingChords;
 import com.sda.javagda40.UltraGuitartron3000.scales.CountingScales;
 import com.sda.javagda40.UltraGuitartron3000.scales.Scales;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

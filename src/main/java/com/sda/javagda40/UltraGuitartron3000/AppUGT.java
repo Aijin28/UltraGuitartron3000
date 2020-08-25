@@ -20,15 +20,15 @@ public class AppUGT {
         ChordsDao chordsDao = new ChordsDao();
         ScalesDao scalesDao = new ScalesDao();
         TraineeDao traineeDao = new TraineeDao();
+        Menu menu = new Menu(SCANNER);
 
         chordsDao.fillingChords();
         scalesDao.fillingScales();
         traineeDao.fillingUsers();
 
         System.err.println("\n(☞ﾟヮﾟ)☞ Witaj w Ultra Guitartron 3000!! ☜(ﾟヮﾟ☜)");
-        PressEnterKeyToContinue.pressEnterKeyToContinue();
 
-        Menu menu = new Menu(SCANNER);
+        PressEnterKeyToContinue.pressEnterKeyToContinue();
 
         menu.startMainMenu();
     }

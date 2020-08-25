@@ -1,8 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.menu;
 
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
+import com.sda.javagda40.UltraGuitartron3000.trainee.TraineeController;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
-import com.sda.javagda40.UltraGuitartron3000.utils.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class Menu {
     private final Scanner SCANNER;
-    EntityDao<Trainee> userDao = new EntityDao<>();
+    EntityDao<Trainee> traineeEntityDao = new EntityDao<>();
     private Trainee user;
 
     public Menu(Scanner SCANNER) {
@@ -38,29 +39,37 @@ public class Menu {
             }
             switch (select) {
                 case 1:
-                    List<Trainee> userList = userDao.findAll(Trainee.class);
-                    for (Trainee trainee : userList) {
+                    //<editor-fold desc="">
+//                    Próbuję to wyciągnąć do osobnej metode, ale jakoś mi nie wychodzi :c
+                    List<Trainee> traineeList = traineeEntityDao.findAll(Trainee.class);
+                    for (Trainee trainee : traineeList) {
                         System.out.println(trainee.getId() +
                                 ". Nazwa: " + trainee.getName());
                     }
                     System.out.println("Wybierz numer z listy: ");
                     try {
                         select = Integer.parseInt(SCANNER.nextLine());
-                    } catch (InputMismatchException ime) {
+                    } catch (InputMismatchException | NumberFormatException ime) {
                         System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                         continue;
                     }
-                    Optional<Trainee> userOptional = userDao.findById(Trainee.class, select);
+                    if (traineeEntityDao.findById(Trainee.class, select).isPresent()){
+                    Optional<Trainee> userOptional = traineeEntityDao.findById(Trainee.class, select);
                     userOptional.ifPresent(x -> user = x);
+                    }else{
+                        System.out.println("Nie ma takiego użytkownika. Wybierz jeszcze raz.");
+                        continue;
+                    }
+                    //</editor-fold>
+                    System.out.println("Wybrano użytkownika: " + user.getName() + ". Miłej pracy 👌");
                     userMenu(user);
                     break;
                 case 2:
                     System.out.println("Podaj nazwę nowego użytkownika: ");
                     String name;
                     name = SCANNER.nextLine();
-
                     Trainee addedUser = new Trainee(name);
-                    userDao.saveOrUpdate(addedUser);
+                    traineeEntityDao.saveOrUpdate(addedUser);
                     System.out.println("Dodano nowego użytkownika: " + addedUser.getName());
                     break;
                 case 0:
@@ -106,11 +115,11 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Użytkownik " + user.getName() + " został usunięty.");
-                    userDao.delete(user);
+                    traineeEntityDao.delete(user);
                     working = false;
                     break;
                 case 4:
-                    System.err.println("Opcja niedostępna.");
+                    System.err.println("Opcja jeszcze niedostępna.");
                     PressEnterKeyToContinue.pressEnterKeyToContinue();
                     break;
                 case 0:
