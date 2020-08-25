@@ -4,9 +4,9 @@ import com.sda.javagda40.UltraGuitartron3000.chords.Chords;
 import com.sda.javagda40.UltraGuitartron3000.chords.ChordsController;
 import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
+import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
 import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
-import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
 
 import java.util.*;
 
@@ -36,7 +36,7 @@ public class ChordsHandler {
         String chordTypeChoice;
         do {
             System.out.println(
-                    "------------------------------\n" +
+                            "------------------------------\n" +
                             "|        +A K O R D Y+       |\n" +
                             "|      1.Znajdź akord        |\n" +
                             "|      2.Ćwicz akord         |\n" +
@@ -87,11 +87,7 @@ public class ChordsHandler {
                     PressEnterKeyToContinue.pressEnterKeyToContinue();
                     break;
                 case 5:
-                    System.out.println("Podaj akord do usunięcia: ");
-                    chordTypeChoice = CHORDS_CONTROLLER.choosingChordType(SCANNER);
-                    byChordName = CHORDS_DAO.findByChordName(chordTypeChoice);
-                    CHORDS_DAO.delete(byChordName.get().getId());
-                    System.out.println("Akord został usunięty.");
+                    CHORDS_CONTROLLER.deletingChord(SCANNER, CHORDS_DAO, CHORDS_CONTROLLER);
                     PressEnterKeyToContinue.pressEnterKeyToContinue();
                     break;
                 default:
@@ -101,12 +97,14 @@ public class ChordsHandler {
         } while (state);
     }
 
+
+
     private void nonAdminChordHandler(boolean state) {
         Optional<Chords> byChordName;
         String chordTypeChoice;
         do {
             System.out.println(
-                            "------------------------------\n" +
+                    "------------------------------\n" +
                             "|        +A K O R D Y+       |\n" +
                             "|      1.Znajdź akord        |\n" +
                             "|      2.Ćwicz akord         |\n" +

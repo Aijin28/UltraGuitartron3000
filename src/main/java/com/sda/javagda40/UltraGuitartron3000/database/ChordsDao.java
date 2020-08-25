@@ -66,6 +66,33 @@ public class ChordsDao {
         }
         return Optional.empty();
     }
+    public Optional<Chords> findByChordNameToDelete(String chordTypeChoice) {
+        SessionFactory sessionFactory = hibernateFactory.getSessionFactory();
+        try (Session session = sessionFactory.openSession()) {
+
+            // narzędzie do tworzenia zapytań i kreowania klauzuli 'where'
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+
+            // obiekt reprezentujący zapytanie
+            CriteriaQuery<Chords> criteriaQuery = cb.createQuery(Chords.class);
+
+            // obiekt reprezentujący tabelę bazodanową.
+            // do jakiej tabeli kierujemy nasze zapytanie?
+            Root<Chords> rootTable = criteriaQuery.from(Chords.class);
+
+            // wykonanie zapytania
+            criteriaQuery.select(rootTable).where(
+                    cb.equal(rootTable.get("chordName"), chordTypeChoice)
+            );
+
+            // poznanie uniwersalnego rozwiązania które działa z każdą bazą danych
+            // używanie klas których będziecie używać na JPA (Spring)
+
+            return Optional.ofNullable(session.createQuery(criteriaQuery).getSingleResult());
+        } catch (HibernateException | NoResultException ignored) {
+        }
+        return Optional.empty();
+    }
 
     public List<String> findChordNames() {
         List<String> list = new ArrayList<>();

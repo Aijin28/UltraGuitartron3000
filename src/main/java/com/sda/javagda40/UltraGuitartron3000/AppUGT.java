@@ -15,7 +15,7 @@ public class AppUGT {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("Ładowanie, proszę czekać...");
+        System.out.println("Ładowanie, proszę czekać ᓚᘏᗢ ");
         Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         ChordsDao chordsDao = new ChordsDao();
         ScalesDao scalesDao = new ScalesDao();

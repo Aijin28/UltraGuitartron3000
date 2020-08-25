@@ -22,8 +22,8 @@ public class TraineeDao {
             Trainee admin = new Trainee("Admin", true);
             traineeEntityDao.saveOrUpdate(admin);
         }
-        if (traineeDao.findByUserName("User").isEmpty()) {
-            Trainee user = new Trainee("User");
+        if (traineeDao.findByUserName("DefaultUser").isEmpty()) {
+            Trainee user = new Trainee("DefaultUser");
             traineeEntityDao.saveOrUpdate(user);
         }
     }

@@ -32,8 +32,8 @@ public class ScalesHandler {
                                 "|      1.Znajdź skalę        |\n" +
                                 "|      2.Ćwicz skalę         |\n" +
                                 "|      3.Wypisz stopnie      |\n" +
-                                "|      3.Dodaj skalę         |\n" +
-                                "|      4.Usuń skalę          |\n" +
+                                "|      4.Dodaj skalę         |\n" +
+                                "|      5.Usuń skalę          |\n" +
                                 "|      0.Powrót              |\n" +
                                 "|                            |\n" +
                                 "------------------------------\n");
@@ -165,7 +165,7 @@ public class ScalesHandler {
             try {
                 selectedScale = Integer.parseInt(SCANNER.nextLine());
                 return selectedScale;
-            } catch (InputMismatchException ime) {
+            } catch (InputMismatchException | NumberFormatException ime) {
                 System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
             }
         }
@@ -184,9 +184,12 @@ public class ScalesHandler {
 
     private void deleteScale() {
         int selectedScale = selectScale(scalesEntityDao);
-        Scales deletableScale = scalesEntityDao.findById(Scales.class, selectedScale).get();
-        System.out.println("Skala " + deletableScale.getScaleName() + " została usunięta.");
-        scalesEntityDao.delete(deletableScale);
+        Optional<Scales> optionalScaleToDelete = scalesEntityDao.findById(Scales.class, selectedScale);
+        if (optionalScaleToDelete.isPresent()) {
+            Scales deletableScale = optionalScaleToDelete.get();
+            System.out.println("Skala " + deletableScale.getScaleName() + " została usunięta.");
+            scalesEntityDao.delete(deletableScale);
+        } else System.out.println("Nie ma takiej skali.");
     }
 
     private void scaleTraining(Trainee user) {
@@ -209,7 +212,8 @@ public class ScalesHandler {
         System.out.println("Podaj siódmy dźwięk skali: ");
         String seventhNote = SCANNER.nextLine().toUpperCase();
         List<String> userGuessedNotes = Arrays.asList(firstNote, secondNote, thirdNote, fourthNote, fifthNote, sixthNote, seventhNote);
-        List<String> guessedScaleNotes = scalesController.gettingScaleFromArray(scalesEntityDao.findById(Scales.class, selectedScale), scaleRootNote);
+        Optional<Scales> scaleById = scalesEntityDao.findById(Scales.class, selectedScale);
+        List<String> guessedScaleNotes = scalesController.gettingScaleFromArray(scaleById, scaleRootNote);
         for (int i = 0; i < userGuessedNotes.size(); i++) {
             String s = userGuessedNotes.get(i);
             if (s.equals(guessedScaleNotes.get(i))) {

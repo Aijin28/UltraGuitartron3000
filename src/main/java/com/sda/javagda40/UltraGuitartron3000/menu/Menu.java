@@ -1,9 +1,9 @@
 package com.sda.javagda40.UltraGuitartron3000.menu;
 
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
-import com.sda.javagda40.UltraGuitartron3000.trainee.TraineeController;
-import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
+import com.sda.javagda40.UltraGuitartron3000.database.TraineeDao;
 import com.sda.javagda40.UltraGuitartron3000.trainee.Trainee;
+import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -14,6 +14,7 @@ public class Menu {
     private final Scanner SCANNER;
     EntityDao<Trainee> traineeEntityDao = new EntityDao<>();
     private Trainee user;
+    private final TraineeDao TRAINEE_DAO = new TraineeDao();
 
     public Menu(Scanner SCANNER) {
         this.SCANNER = SCANNER;
@@ -24,12 +25,12 @@ public class Menu {
         while (working) {
             System.out.println(
                     "-----------------------------------\n" +
-                    "|           +U G T 3000+          |\n" +
-                    "|      1.Wybierz użytkownika      |\n" +
-                    "|      2.Utwórz użytkownika       |\n" +
-                    "|      0.Zakończ                  |\n" +
-                    "|                                 |\n" +
-                    "-----------------------------------\n");
+                            "|           +U G T 3000+          |\n" +
+                            "|      1.Wybierz użytkownika      |\n" +
+                            "|      2.Utwórz użytkownika       |\n" +
+                            "|      0.Zakończ                  |\n" +
+                            "|                                 |\n" +
+                            "-----------------------------------\n");
             int select;
             try {
                 select = Integer.parseInt(SCANNER.nextLine());
@@ -53,10 +54,10 @@ public class Menu {
                         System.out.println("Niewłaściwy wybór, wybierz jeszcze raz!");
                         continue;
                     }
-                    if (traineeEntityDao.findById(Trainee.class, select).isPresent()){
-                    Optional<Trainee> userOptional = traineeEntityDao.findById(Trainee.class, select);
-                    userOptional.ifPresent(x -> user = x);
-                    }else{
+                    if (traineeEntityDao.findById(Trainee.class, select).isPresent()) {
+                        Optional<Trainee> userOptional = traineeEntityDao.findById(Trainee.class, select);
+                        userOptional.ifPresent(x -> user = x);
+                    } else {
                         System.out.println("Nie ma takiego użytkownika. Wybierz jeszcze raz.");
                         continue;
                     }
@@ -69,8 +70,12 @@ public class Menu {
                     String name;
                     name = SCANNER.nextLine();
                     Trainee addedUser = new Trainee(name);
-                    traineeEntityDao.saveOrUpdate(addedUser);
-                    System.out.println("Dodano nowego użytkownika: " + addedUser.getName());
+                    if (TRAINEE_DAO.findByUserName(addedUser.getName()).isPresent()) {
+                        System.out.println("Taki użytkownik już jest na liście. Podaj inną nazwę.");
+                    } else {
+                        traineeEntityDao.saveOrUpdate(addedUser);
+                        System.out.println("Dodano nowego użytkownika: " + addedUser.getName());
+                    }
                     break;
                 case 0:
                     System.out.println("Do widzenia!");
@@ -91,7 +96,7 @@ public class Menu {
             ChordsHandler chordsHandler = new ChordsHandler(SCANNER, user);
             ScalesHandler scalesHandler = new ScalesHandler(SCANNER, user);
             System.out.println(
-                            "--------------------------------\n" +
+                    "--------------------------------\n" +
                             "|           +M E N U+          |\n" +
                             "|      1.Akordy                |\n" +
                             "|      2.Skale                 |\n" +

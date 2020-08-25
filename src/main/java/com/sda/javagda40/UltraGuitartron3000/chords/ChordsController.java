@@ -4,6 +4,7 @@ package com.sda.javagda40.UltraGuitartron3000.chords;
 import com.sda.javagda40.UltraGuitartron3000.database.ChordsDao;
 import com.sda.javagda40.UltraGuitartron3000.database.EntityDao;
 import com.sda.javagda40.UltraGuitartron3000.utils.Notes;
+import com.sda.javagda40.UltraGuitartron3000.utils.PressEnterKeyToContinue;
 
 import java.util.*;
 
@@ -12,13 +13,13 @@ public class ChordsController {
     public List<String> gettingChordWithNotes(Optional<Chords> optionalChord, String choice) {
         List<String> chosenChord = new ArrayList<>();
         List<String> notesArray = Notes.getNotesList();
-        int firstNoteIndex = notesArray.indexOf(choice.toUpperCase());
+        int rootNoteIndex = notesArray.indexOf(choice.toUpperCase());
         if (optionalChord.isPresent()) {
             Chords chord = optionalChord.get();
-            chosenChord.add(notesArray.get(chord.getFirstNote() + firstNoteIndex));
-            chosenChord.add(notesArray.get(chord.getSecondNote() + firstNoteIndex));
-            chosenChord.add(notesArray.get(chord.getThirdNote() + firstNoteIndex));
-            chosenChord.add(notesArray.get(chord.getFourthNote() + firstNoteIndex));
+            chosenChord.add(notesArray.get(chord.getFirstNote() + rootNoteIndex));
+            chosenChord.add(notesArray.get(chord.getSecondNote() + rootNoteIndex));
+            chosenChord.add(notesArray.get(chord.getThirdNote() + rootNoteIndex));
+            chosenChord.add(notesArray.get(chord.getFourthNote() + rootNoteIndex));
         } else System.out.println("Nie ma takiego akordu.");
         return chosenChord;
     }
@@ -62,5 +63,16 @@ public class ChordsController {
             }
         } while (state);
         return chordTypeChoice;
+    }
+
+    public void deletingChord(Scanner SCANNER, ChordsDao CHORDS_DAO, ChordsController CHORDS_CONTROLLER) {
+        System.out.println("Podaj akord do usunięcia: ");
+        System.out.println(CHORDS_DAO.findChordNames());
+        String chordTypeChoice = SCANNER.nextLine();
+        Optional<Chords> byChordName = CHORDS_DAO.findByChordNameToDelete(chordTypeChoice);
+        if (byChordName.isPresent()) {
+            CHORDS_DAO.delete(byChordName.get().getId());
+            System.out.println("Akord został usunięty.");
+        } else System.out.println("Nie ma takiego akordu.");
     }
 }
